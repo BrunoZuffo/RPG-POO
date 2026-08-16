@@ -1,4 +1,3 @@
-
 package personagens;
 
 import inventario.Item;
@@ -19,12 +18,11 @@ public class Personagem{
     public void setNome(String nome){
         this.nome=nome;
     }
-    
+
     public String getNome(){
         return this.nome;
     }
 
-    //construtor da classe personagem
     public Personagem(int vida, int dano, int defesa, int inventario_tamanho){
         this.vida=vida;
         this.vida_atual=vida;
@@ -36,21 +34,19 @@ public class Personagem{
     }
 
     public void ataque1(Personagem alvo){
-        //arredondando o valor usando Math.round para o inteiro mais proximo e convertendo pra int
         int dano_causado=(int)Math.round((this.item_usando.getDano()+this.dano)*1.0-alvo.defesa);
         if(dano_causado<0){
             dano_causado=0;
-        }                        //ja sabemos quem está atacando, quando formos chamar
-        alvo.vida-=dano_causado; // será algo como guerreiro.ataque1(alvo)
-                                 // entao é só passar o alvo, e usar o this, para falar que
-    }                            // é o dano de quem chama a funcao
+        }
+        alvo.vida_atual-=dano_causado;
+    }
 
     public void ataque2(Personagem alvo){
         int dano_causado=(int)Math.round((this.item_usando.getDano()+this.dano)*1.5-alvo.defesa);
         if(dano_causado<0){
             dano_causado=0;
         }
-        alvo.vida-=dano_causado;
+        alvo.vida_atual-=dano_causado;
     }
 
     public int getVida(){
@@ -93,5 +89,17 @@ public class Personagem{
         return this.vida_atual;
     }
 
+    public Item getItemAtual(){
+        return this.item_usando;
+    }
 
+    public List<Item> getInventario() {
+        return inventario;
+    }
+
+    public void carregarEstado(int vidaAtual, Item itemUsando, List<Item> inventario) {
+        this.vida_atual = vidaAtual;
+        this.item_usando = itemUsando;
+        this.inventario = new ArrayList<>(inventario);
+    }
 }

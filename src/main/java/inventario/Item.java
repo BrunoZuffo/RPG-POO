@@ -1,7 +1,6 @@
 package inventario;
 
-public enum Item { //enum -> conjunto fechado de opcoes pre definidas -> itens do jogo
-    //Lista dos itens e seus atributos:
+public enum Item {
     MAO("Mão", 0, 0, 0, 0, 0),
 
     ADAGA("Adaga", 3, 0, 25, 2, 0),
@@ -36,8 +35,6 @@ public enum Item { //enum -> conjunto fechado de opcoes pre definidas -> itens d
     BOLSA_GRANDE("Bolsa Grande", 0, 0, 120, 5, 25),
     MOCHILA_AVENTUREIRO("Mochila do Aventureiro", 0, 0, 180, 6, 35),
     BOLSA_MAGICA("Bolsa Mágica", 0, 0, 300, 8, 50);
-    //Construtor e funcoes, nao botamos coisas como public, private, antes desse construtor pq ele ja eh
-    //implicitamente privado
 
     private String nome;
     private int dano;
@@ -74,5 +71,4 @@ public enum Item { //enum -> conjunto fechado de opcoes pre definidas -> itens d
     public int getArmazenamentoExtra(){
         return this.armazenamento_extra;
     }
-
 }
