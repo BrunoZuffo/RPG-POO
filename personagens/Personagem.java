@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Personagem{
 
+    private String nome;
     private int vida;
     private int vida_atual;
     private int dano;
@@ -14,6 +15,14 @@ public class Personagem{
     private int inventario_tamanho;
     private Item item_usando;
     private List<Item> inventario=new ArrayList<>();
+
+    public void setNome(String nome){
+        this.nome=nome;
+    }
+    
+    public String getNome(){
+        return this.nome;
+    }
 
     //construtor da classe personagem
     public Personagem(int vida, int dano, int defesa, int inventario_tamanho){
@@ -78,6 +87,10 @@ public class Personagem{
             espacoUsado+=item.getTamanho();
         }
         return espacoUsado;
+    }
+
+    public int getVidaAtual(){
+        return this.vida_atual;
     }
 
 
