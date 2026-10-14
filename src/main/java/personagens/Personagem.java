@@ -11,6 +11,10 @@ public class Personagem{
     private int vida_atual;
     private int dano;
     private int defesa;
+    private int stamina;
+    private int staminaAtual;
+    private int mana;
+    private int manaAtual;
     private int inventario_tamanho;
     private Item item_usando;
     private List<Item> inventario=new ArrayList<>();
@@ -23,9 +27,11 @@ public class Personagem{
         return this.nome;
     }
 
-    public Personagem(int vida, int dano, int defesa, int inventario_tamanho){
+    public Personagem(int vida,int stamina, int mana, int dano, int defesa, int inventario_tamanho){
         this.vida=vida;
-        this.vida_atual=vida;
+        this.vida_atual =vida;
+        this.stamina=stamina;
+        this.mana=mana;
         this.dano=dano;
         this.defesa=defesa;
         this.inventario_tamanho=inventario_tamanho;
@@ -33,21 +39,6 @@ public class Personagem{
         this.inventario=new ArrayList<>();
     }
 
-    public void ataque1(Personagem alvo){
-        int dano_causado=(int)Math.round((this.item_usando.getDano()+this.dano)*1.0-alvo.defesa);
-        if(dano_causado<0){
-            dano_causado=0;
-        }
-        alvo.vida_atual-=dano_causado;
-    }
-
-    public void ataque2(Personagem alvo){
-        int dano_causado=(int)Math.round((this.item_usando.getDano()+this.dano)*1.5-alvo.defesa);
-        if(dano_causado<0){
-            dano_causado=0;
-        }
-        alvo.vida_atual-=dano_causado;
-    }
 
     public int getVida(){
         return this.vida;
@@ -101,5 +92,35 @@ public class Personagem{
         this.vida_atual = vidaAtual;
         this.item_usando = itemUsando;
         this.inventario = new ArrayList<>(inventario);
+    }
+
+    public int setVidaAtual(int dano){
+        this.vida_atual-=dano;
+        return this.vida_atual;
+    }
+
+    public int getStamina(){
+        return this.stamina;
+    }
+
+    public int getMana(){
+        return this.mana;
+    }
+
+    public int getManaAtual(){
+        return this.manaAtual;
+    }
+
+    public int getStaminaAtual(){
+        return this.staminaAtual;
+    }
+
+    @Override
+    public String toString(){
+        return getClass().getSimpleName() +"- atributos base: | Vida: "+ getVida()+" | Dano: " + getDano()+" | Defesa: "+ getDefesa()+" | Stamina: "+ getStamina() +" | Mana: "+ getMana() +" |\n\n";
+    }
+    
+    public String getAtributosAtuais(){
+        return "| Vida Atual: "+ getVidaAtual() +" | Stamina Atual: "+ getStaminaAtual() +"| Mana Atual: "+ getManaAtual();
     }
 }

@@ -45,10 +45,10 @@ public class Jogo {
 
         System.out.println("=======================================================");
         System.out.println("\nEscolha seu personagem:\n\n");
-        System.out.println("1- Guerreiro - atributos base: | Vida: "+ guerreiro.getVida()+" | Dano: " + guerreiro.getDano()+" | Defesa: "+ guerreiro.getDefesa()+" |\n\n");
-        System.out.println("2- Mago - atributos base: | Vida: "+ mago.getVida()+" | Dano: " + mago.getDano()+" | Defesa: "+ mago.getDefesa()+" |\n\n");
-        System.out.println("3- Anão - atributos base: | Vida: "+ anão.getVida()+" | Dano: " + anão.getDano()+" | Defesa: "+ anão.getDefesa()+" |\n\n");
-        System.out.println("4- Elfo - atributos base: | Vida: "+ elfo.getVida()+" | Dano: " + elfo.getDano()+" | Defesa: "+ elfo.getDefesa()+" |\n\n");
+        System.out.println("1- "+guerreiro.toString());
+        System.out.println("2- "+mago.toString());
+        System.out.println("3- "+anão.toString());
+        System.out.println("4- "+elfo.toString());
 
         jogador=null;
         
@@ -79,7 +79,7 @@ public class Jogo {
         }
 
         jogador.setNome(nome);
-        System.out.println("\nPersonagem criado com sucesso! \n\nNome: "+ jogador.getNome() +"\nClasse: "+ jogador.getClass().getSimpleName() + "\nAtributos base: | Vida= "+ jogador.getVida()+" | Dano: " + jogador.getDano()+" | Defesa: "+ jogador.getDefesa()+" |\n\n");
+        System.out.println("\nPersonagem criado com sucesso!\n"+jogador.toString());
         System.out.println("========================================================");
 
         salvarJogo(jogador);
@@ -100,6 +100,12 @@ public class Jogo {
         else if(save.getClasse().equals("Mago")){
             jogador = new Mago();
         }
+        else if(save.getClasse().equals("Anão")){
+            jogador = new Anão();
+        }
+        else if(save.getClass().equals("Elfo")){
+            jogador = new Elfo();
+        }
         else{
             System.out.println("Classe salva desconhecida.");
             return;
@@ -109,10 +115,7 @@ public class Jogo {
         jogador.carregarEstado(save.getVidaAtual(), save.getItemUsando(), save.getInventario());
 
         System.out.println("\nJogo carregado com sucesso!");
-        System.out.println("Nome: " + jogador.getNome());
-        System.out.println("Classe: " + jogador.getClass().getSimpleName());
-        System.out.println("Vida atual: " + jogador.getVidaAtual());
-        System.out.println("Item equipado: " + jogador.getItemAtual());
+        System.out.println(jogador.getAtributosAtuais());
     }
 
     public void sair(){
@@ -120,7 +123,7 @@ public class Jogo {
     }
 
     private void salvarJogo(Personagem jogador){
-        SaveGame save= new SaveGame(jogador.getNome(), jogador.getClass().getSimpleName(), jogador.getVidaAtual(), jogador.getItemAtual(), jogador.getInventario());
+        SaveGame save= new SaveGame(jogador.getNome(), jogador.getClass().getSimpleName(), jogador.getVidaAtual(), jogador.getStaminaAtual(), jogador.getManaAtual(), jogador.getItemAtual(), jogador.getInventario());
         GerenciadorSave.salvar(save);
     }
 }
