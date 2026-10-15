@@ -1,6 +1,7 @@
 package jogo;
 
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 import personagens.Personagem;
 import personagens.Anão;
@@ -14,6 +15,18 @@ public class Jogo {
 
     public Jogo(){
         this.scanner = new Scanner(System.in);
+    }
+
+    private int lerInteiro() {
+        while (true) {
+            try {
+                return scanner.nextInt();
+            }
+            catch (InputMismatchException erro) {
+                System.out.println("Entrada invalida! Digite um numero inteiro.");
+                scanner.nextLine();
+            }
+        }
     }
 
     public void menu(){

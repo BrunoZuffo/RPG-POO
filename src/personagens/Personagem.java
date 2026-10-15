@@ -137,4 +137,23 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     }
 
     public abstract void regenerarAtributos(); // no jogo vamos recuperar os atributos de todos por turno, public facilita
+
+    protected boolean gastarMana(int quantidade) {
+        if (manaAtual < quantidade) {
+            return false;
+        }
+
+        manaAtual -= quantidade;
+        return true;
+    }
+
+    protected boolean gastarStamina(int quantidade) {
+        if (staminaAtual < quantidade) {
+            return false;
+        }
+
+        staminaAtual -= quantidade;
+        return true;
+    }
+
 }
