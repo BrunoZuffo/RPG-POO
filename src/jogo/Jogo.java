@@ -36,7 +36,7 @@ public class Jogo {
         System.out.println("3 - Sair\n");
         System.out.println("=======================================================");
 
-        int escolha=scanner.nextInt();
+        int escolha=lerInteiro();
         if(escolha==1){
             continuar_jogo();
         }
@@ -65,7 +65,7 @@ public class Jogo {
         jogador=null;
         
         while(jogador==null){
-            int escolha=scanner.nextInt();
+            int escolha=lerInteiro();
             if(escolha==1){
                 jogador=guerreiro;
             }
@@ -83,7 +83,7 @@ public class Jogo {
             }
         }
 
-        scanner.nextLine(); // limpa o Enter que ficou do nextInt()
+        scanner.nextLine(); // limpa o Enter que ficou do nextInt() do lerInteiro()
         String nome=null;
         System.out.println("\nEscolha o nome do seu personagem: ");
         while(nome==null || nome.isBlank()){

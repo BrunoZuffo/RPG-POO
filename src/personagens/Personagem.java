@@ -4,7 +4,7 @@ import inventario.Item;
 import java.util.List;
 import java.util.ArrayList;
 
-public abstract class Personagem{ //abstract para podermos fazer abstract ataque1 e 2 pra cada personagem ter o seu
+public abstract class Personagem{ //abstract para podermos fazer abstract ataque 1 e 2 pra cada personagem ter o seu
 
     private String nome;
     private int vida;
@@ -27,7 +27,7 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         return this.nome;
     }
 
-    public Personagem(int vida,int stamina, int mana, int dano, int defesa, int inventario_tamanho){
+    public Personagem(int vida, int stamina, int mana, int dano, int defesa, int inventario_tamanho){
         this.vida=vida;
         this.vida_atual =vida;
         this.stamina=stamina;
@@ -40,7 +40,6 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         this.item_usando=Item.MAO;
         this.inventario=new ArrayList<>();
     }
-
 
     public int getVida(){
         return this.vida;
@@ -139,20 +138,20 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     public abstract void regenerarAtributos(); // no jogo vamos recuperar os atributos de todos por turno, public facilita
 
     protected boolean gastarMana(int quantidade) {
-        if (manaAtual < quantidade) {
+        if (manaAtual<quantidade) {
             return false;
         }
 
-        manaAtual -= quantidade;
+        manaAtual-=quantidade;
         return true;
     }
 
     protected boolean gastarStamina(int quantidade) {
-        if (staminaAtual < quantidade) {
+        if (staminaAtual<quantidade) {
             return false;
         }
 
-        staminaAtual -= quantidade;
+        staminaAtual-=quantidade;
         return true;
     }
 
