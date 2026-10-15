@@ -135,4 +135,6 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     protected void recuperarVida(int quantidade){
         vida_atual=Math.min(vida,quantidade+vida_atual);
     }
+
+    public abstract void regenerarAtributos(); // no jogo vamos recuperar os atributos de todos por turno, public facilita
 }
