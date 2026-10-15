@@ -4,7 +4,7 @@ import inventario.Item;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Personagem{
+public abstract class Personagem{ //abstract para podermos fazer abstract ataque1 e 2 pra cada personagem ter o seu
 
     private String nome;
     private int vida;
@@ -32,6 +32,8 @@ public class Personagem{
         this.vida_atual =vida;
         this.stamina=stamina;
         this.mana=mana;
+        this.manaAtual=mana; //na criação do personagem mana é a total
+        this.staminaAtual=stamina; // idem
         this.dano=dano;
         this.defesa=defesa;
         this.inventario_tamanho=inventario_tamanho;
@@ -74,7 +76,7 @@ public class Personagem{
             espacoUsado+=item.getTamanho();
         }
         return espacoUsado;
-    }
+    }    
 
     public int getVidaAtual(){
         return this.vida_atual;
@@ -86,12 +88,6 @@ public class Personagem{
 
     public List<Item> getInventario() {
         return inventario;
-    }
-
-    public void carregarEstado(int vidaAtual, Item itemUsando, List<Item> inventario) {
-        this.vida_atual = vidaAtual;
-        this.item_usando = itemUsando;
-        this.inventario = new ArrayList<>(inventario);
     }
 
     public int setVidaAtual(int dano){
@@ -122,5 +118,21 @@ public class Personagem{
     
     public String getAtributosAtuais(){
         return "| Vida Atual: "+ getVidaAtual() +" | Stamina Atual: "+ getStaminaAtual() +"| Mana Atual: "+ getManaAtual();
+    }
+
+    public abstract void ataque1(Personagem alvo); //vamos retornar void pq estamos alterando a vida do inimigo diretamente na nossa logica ao inves d decrementar algum valor da vidaAtual do inimigo
+
+    public abstract void ataque2(Personagem alvo);
+
+    protected void recuperarMana(int quantidade){
+        manaAtual=Math.min(mana,quantidade+manaAtual); // evitamos ultrapassar a mana máxima
+    }
+
+    protected void recuperarStamina(int quantidade){
+        staminaAtual=Math.min(stamina,quantidade+staminaAtual);
+    }
+
+    protected void recuperarVida(int quantidade){
+        vida_atual=Math.min(vida,quantidade+vida_atual);
     }
 }

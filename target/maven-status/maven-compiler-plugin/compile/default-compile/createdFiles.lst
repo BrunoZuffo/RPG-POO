@@ -1,8 +1,0 @@
-Main.class
-jogo/SaveGame.class
-personagens/Mago.class
-persistencia/GerenciadorSave.class
-inventario/Item.class
-personagens/Personagem.class
-personagens/Guerreiro.class
-jogo/Jogo.class

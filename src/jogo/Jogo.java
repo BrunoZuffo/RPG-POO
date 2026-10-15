@@ -7,7 +7,6 @@ import personagens.Anão;
 import personagens.Elfo;
 import personagens.Guerreiro;
 import personagens.Mago;
-import persistencia.GerenciadorSave;
 
 public class Jogo {
 
@@ -79,51 +78,17 @@ public class Jogo {
         }
 
         jogador.setNome(nome);
-        System.out.println("\nPersonagem criado com sucesso!\n"+jogador.toString());
-        System.out.println("========================================================");
+        System.out.println("\nPersonagem criado com sucesso!\n"+jogador.getNome()+"- "+jogador.toString());
 
-        salvarJogo(jogador);
+        System.out.println("========================================================");
     }
 
     public void continuar_jogo(){
-        SaveGame save = GerenciadorSave.carregar();
-
-        if(save == null){
-            return;
-        }
-
-        Personagem jogador;
-
-        if(save.getClasse().equals("Guerreiro")){
-            jogador = new Guerreiro();
-        }
-        else if(save.getClasse().equals("Mago")){
-            jogador = new Mago();
-        }
-        else if(save.getClasse().equals("Anão")){
-            jogador = new Anão();
-        }
-        else if(save.getClass().equals("Elfo")){
-            jogador = new Elfo();
-        }
-        else{
-            System.out.println("Classe salva desconhecida.");
-            return;
-        }
-
-        jogador.setNome(save.getNome());
-        jogador.carregarEstado(save.getVidaAtual(), save.getItemUsando(), save.getInventario());
-
-        System.out.println("\nJogo carregado com sucesso!");
-        System.out.println(jogador.getAtributosAtuais());
+        
     }
 
     public void sair(){
         return;
     }
 
-    private void salvarJogo(Personagem jogador){
-        SaveGame save= new SaveGame(jogador.getNome(), jogador.getClass().getSimpleName(), jogador.getVidaAtual(), jogador.getStaminaAtual(), jogador.getManaAtual(), jogador.getItemAtual(), jogador.getInventario());
-        GerenciadorSave.salvar(save);
-    }
 }

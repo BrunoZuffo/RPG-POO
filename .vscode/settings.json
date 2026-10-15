@@ -1,5 +1,0 @@
-{
-    "java.import.maven.enabled": true,
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "java.project.importOnFirstTimeStartup": "automatic"
-}
