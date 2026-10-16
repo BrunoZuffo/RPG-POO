@@ -37,15 +37,19 @@ public class Jogo {
         System.out.println("=======================================================");
 
         int escolha=lerInteiro();
+        while(escolha!=1&&escolha!=2&&escolha!=3){
+            System.out.println("Digite um valor válido!");       
+            escolha=lerInteiro();     
+        }
         if(escolha==1){
-            continuar_jogo();
-        }
-        else if(escolha==2){
-            iniciar();
-        }
-        else{
-            sair();
-        }
+                continuar_jogo();
+            }
+            else if(escolha==2){
+                iniciar();
+            }
+            else if(escolha==3){
+                sair();
+            }
     }
 
     public void iniciar(){
