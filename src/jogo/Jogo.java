@@ -101,9 +101,38 @@ public class Jogo {
     }
 
     public void aventura(){
-        System.out.println("\nBem-vindo à vila inicial, "+jogador.getNome()+"!");
-        System.out.println("Atributos atuais:");
-        System.out.println(jogador.getAtributosAtuais());
+        introducao();
+
+        System.out.println("\n================ CAPITULO 1 ================");
+        System.out.println("              VILA DE VALENFORD");
+        System.out.println("============================================\n");
+
+        System.out.println("Apos dias de viagem, voce finalmente chega");
+        System.out.println("a uma pequena vila chamada Valenford.");
+
+        System.out.println("\nUm senhor se aproxima de voce.");
+
+        System.out.println("\nAnciao: Seja bem-vindo, viajante!");
+        System.out.println("Anciao: Qual e o seu nome?");
+
+        System.out.println("\n"+jogador.getNome()+": Meu nome e "+jogador.getNome()+".");
+
+        System.out.println("\nAnciao: Chegou em tempos sombrios...");
+        System.out.println("Anciao: Criaturas estao atacando nossa vila.");
+        System.out.println("Anciao: Precisamos de ajuda!");
+
+        System.out.println("\nAntes que voce consiga responder,");
+        System.out.println("um grito ecoa pela entrada da vila.");
+
+        System.out.println("\nUma criatura invade o vilarejo.");
+        System.out.println("Os moradores correm desesperados.");
+        System.out.println("Voce se prepara para lutar.");
+
+        System.out.println("\nPressione ENTER para iniciar o combate...");
+        scanner.nextLine();
+        while(!scanner.nextLine().isEmpty()){
+            System.out.println("Pressione apenas ENTER!");
+        }
 
         Personagem inimigo=new Goblin();
 
@@ -111,12 +140,22 @@ public class Jogo {
 
         boolean venceu=combate.iniciar(jogador,inimigo);
 
-        if(venceu){
-            System.out.println("Parabens!! Voce pode continuar sua aventura!");
-        }
-        else{
+        if(!venceu){
+            System.out.println("\nSua jornada terminou antes mesmo de comecar.");
             System.out.println("Fim de jogo!");
+            return;
         }
+
+        System.out.println("\n============================================");
+        System.out.println("               A VILA ESTA SALVA!");
+        System.out.println("============================================\n");
+
+        System.out.println("Os moradores comemoram sua vitoria!");
+
+        System.out.println("\nAnciao: Voce nos salvou, "+jogador.getNome()+"!");
+        System.out.println("Anciao: Mas temo que isso seja apenas o comeco.");
+        System.out.println("Anciao: Precisamos descobrir de onde essas");
+        System.out.println("criaturas estao vindo.");
     }
 
     public void continuar_jogo(){
@@ -127,4 +166,27 @@ public class Jogo {
         return;
     }
 
+    private void introducao(){
+        System.out.println("\n========================================================");
+        System.out.println("             RPG - A ASCENSAO DAS SOMBRAS");
+        System.out.println("========================================================\n");
+
+        System.out.println("Durante seculos, o reino de Eldoria viveu em paz.");
+        System.out.println("Uma antiga magia mantinha adormecidas as criaturas");
+        System.out.println("mais perigosas do continente.");
+
+        System.out.println("\nEntretanto, algo mudou...");
+
+        System.out.println("\nCriaturas comecaram a atacar viajantes.");
+        System.out.println("Aldeias desapareceram misteriosamente.");
+        System.out.println("E um antigo mal parece ter despertado.");
+
+        System.out.println("\nO destino de Eldoria esta prestes a mudar.");
+
+        System.out.println("\nPressione ENTER para iniciar sua jornada...");
+        scanner.nextLine();
+        while(!scanner.nextLine().isEmpty()){
+            System.out.println("Pressione apenas ENTER!");
+        }
+    }
 }
