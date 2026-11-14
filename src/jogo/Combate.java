@@ -33,7 +33,7 @@ public class Combate{
             System.out.println("2 - Ataque especial");
             System.out.println("3 - Descansar");
 
-            int escolha=lerInteiro();
+            int escolha=Entrada.lerInteiro(scanner);
 
             try{
                 if(escolha==1){
@@ -103,15 +103,4 @@ public class Combate{
         }
     }
 
-    private int lerInteiro(){
-        while(true){
-            try{
-                return scanner.nextInt();
-            }
-            catch(InputMismatchException erro){
-                System.out.println("Entrada invalida! Digite um numero inteiro.");
-                scanner.nextLine();
-            }
-        }
-    }
 }

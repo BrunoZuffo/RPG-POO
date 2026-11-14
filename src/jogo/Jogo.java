@@ -19,18 +19,6 @@ public class Jogo {
         this.jogador = null; //fazendo isso podemos acessar jogador a qualquer momento, antes iniciavamos ele só no iniciar()
     }
 
-    private int lerInteiro() {
-        while (true) {
-            try {
-                return scanner.nextInt();
-            }
-            catch (InputMismatchException erro) {
-                System.out.println("Entrada invalida! Digite um numero inteiro.");
-                scanner.nextLine();
-            }
-        }
-    }
-
     public void menu(){
         System.out.println("========================= RPG =========================\n\n");
         System.out.println("1 - Continuar jogo\n");
@@ -38,10 +26,10 @@ public class Jogo {
         System.out.println("3 - Sair\n");
         System.out.println("=======================================================");
 
-        int escolha=lerInteiro();
+        int escolha=Entrada.lerInteiro(scanner);
         while(escolha!=1&&escolha!=2&&escolha!=3){
             System.out.println("Digite um valor válido!");       
-            escolha=lerInteiro();     
+            escolha=Entrada.lerInteiro(scanner);     
         }
         if(escolha==1){
                 continuar_jogo();
@@ -70,7 +58,7 @@ public class Jogo {
         jogador=null;
         
         while(jogador==null){
-            int escolha=lerInteiro();
+            int escolha=Entrada.lerInteiro(scanner);
             if(escolha==1){
                 jogador=guerreiro;
             }
