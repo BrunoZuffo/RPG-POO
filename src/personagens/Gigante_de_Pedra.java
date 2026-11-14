@@ -2,12 +2,12 @@ package personagens;
 
 public class Gigante_de_Pedra extends Personagem{
     
-    private static final int REGEN_VIDA=5;
-    private static final int REGEN_MANA=1;
+    private static final int REGEN_VIDA=0;
+    private static final int REGEN_MANA=0;
     private static final int REGEN_STAMINA=15;
     
-    private static final int CUSTO_ATAQUE1=12;
-    private static final int CUSTO_ATAQUE2=30;
+    private static final int CUSTO_ATAQUE1=20;
+    private static final int CUSTO_ATAQUE2=50;
 
     public Gigante_de_Pedra(){
         super(230,180,0,38,28,0);
@@ -26,7 +26,7 @@ public class Gigante_de_Pedra extends Personagem{
     @Override 
     public void ataque2(Personagem alvo){
         gastarStamina(CUSTO_ATAQUE2);
-        int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*1.5-alvo.getDefesa());
+        int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*1.7-alvo.getDefesa());
         if(dano_causado<1){
             dano_causado=1;
         }

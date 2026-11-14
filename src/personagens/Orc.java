@@ -2,9 +2,9 @@ package personagens;
 
 public class Orc extends Personagem{
     
-    private static final int REGEN_VIDA=5;
-    private static final int REGEN_MANA=1;
-    private static final int REGEN_STAMINA=15;
+    private static final int REGEN_VIDA=0;
+    private static final int REGEN_MANA=0;
+    private static final int REGEN_STAMINA=12;
     
     private static final int CUSTO_ATAQUE1=12;
     private static final int CUSTO_ATAQUE2=30;
