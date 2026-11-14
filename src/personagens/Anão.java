@@ -10,7 +10,10 @@ public class Anão extends Personagem{
     private static final int CUSTO_ATAQUE2=30;
 
     public Anão(){
-        super(150,150,20,10,30,20,1.0,1.5);
+        super(150,150,20,10,30,20,1.0,1.5,
+                CUSTO_ATAQUE1,"Stamina",
+                CUSTO_ATAQUE2,"Stamina",
+                REGEN_VIDA,REGEN_STAMINA,REGEN_MANA);
     }
 
     @Override //estamos "sobrescrevendo" um metodo herdado da classe mae - personagem

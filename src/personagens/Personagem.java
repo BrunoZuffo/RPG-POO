@@ -21,6 +21,13 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     private List<Item> inventario=new ArrayList<>();
     private double multiplicadorAtaque1;
     private double multiplicadorAtaque2;
+    private final int custoAtaque1;
+    private final int custoAtaque2;
+    private final String recursoAtaque1;
+    private final String recursoAtaque2;
+    private final int regenVida;
+    private final int regenStamina;
+    private final int regenMana;
 
     public void setNome(String nome){
         this.nome=nome;
@@ -30,7 +37,7 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         return this.nome;
     }
 
-    public Personagem(int vida, int stamina, int mana, int dano, int defesa, int inventario_tamanho, double multiplicadorAtaque1, double multiplicadorAtaque2){
+    public Personagem(int vida, int stamina, int mana, int dano, int defesa, int inventario_tamanho, double multiplicadorAtaque1, double multiplicadorAtaque2, int custoAtaque1, int custoAtaque2, String recursoAtaque1, String recursoAtaque2, int regenVida, int regenStamina, int regenMana){
         this.vida=vida;
         this.vida_atual =vida;
         this.stamina=stamina;
@@ -44,6 +51,13 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         this.inventario=new ArrayList<>();
         this.multiplicadorAtaque1=multiplicadorAtaque1;
         this.multiplicadorAtaque2=multiplicadorAtaque2;
+        this.custoAtaque1=custoAtaque1;
+        this.custoAtaque2=custoAtaque2;
+        this.recursoAtaque1=recursoAtaque1;
+        this.recursoAtaque2=recursoAtaque2;
+        this.regenVida=regenVida;
+        this.regenStamina=regenStamina;
+        this.regenMana=regenMana;
     }
 
     public int getVida(){
@@ -198,4 +212,19 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
 
         return dano_causado;
     }
+
+    public String getCustoAtaque1(){
+        return custoAtaque1+" de "+recursoAtaque1;
+    }
+
+    public String getCustoAtaque2(){
+        return custoAtaque2+" de "+recursoAtaque2;
+    }
+
+    public String getRegeneracao(){
+        return "Vida: ate +"+regenVida
+            +" | Stamina: ate +"+regenStamina
+            +" | Mana: ate +"+regenMana;
+    }
+
 }

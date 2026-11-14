@@ -10,7 +10,10 @@ public class Guerreiro extends Personagem {
     private static final int CUSTO_ATAQUE2 = 25;
 
     public Guerreiro(){
-        super(100,120,20,20,20,45,1.0,1.5);
+        super(100,120,20,20,20,45,1.0,1.5,
+                CUSTO_ATAQUE1,"Stamina",
+                CUSTO_ATAQUE2,"Stamina",
+                REGEN_VIDA,REGEN_STAMINA,REGEN_MANA);
     }
 
     @Override 

@@ -10,7 +10,10 @@ public class Mago extends Personagem {
     private static final int CUSTO_ATAQUE2=30;
 
     public Mago(){
-        super(70,20,120,30,10,30,1.0,1.5);
+        super(70,20,120,30,10,30,1.0,1.5,
+                CUSTO_ATAQUE1,"Mana",
+                CUSTO_ATAQUE2,"Mana",
+                REGEN_VIDA,REGEN_STAMINA,REGEN_MANA);
     }
 
     @Override 
