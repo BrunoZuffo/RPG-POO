@@ -17,7 +17,7 @@ public class Gigante_de_Pedra extends Personagem{
     @Override //estamos "sobrescrevendo" um metodo herdado da classe mae - personagem
     public void ataque1(Personagem alvo){
         gastarStamina(CUSTO_ATAQUE1);
-        alvo.setVidaAtual(getDanoAtaque2(alvo));
+        alvo.setVidaAtual(getDanoAtaque1(alvo));
     }
 
     @Override 

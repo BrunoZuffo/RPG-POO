@@ -19,6 +19,8 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     private int inventario_tamanho;
     private Item item_usando;
     private List<Item> inventario=new ArrayList<>();
+    private double multiplicadorAtaque1;
+    private double multiplicadorAtaque2;
 
     public void setNome(String nome){
         this.nome=nome;
@@ -185,5 +187,15 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
 
     public int getDanoAtaque2(Personagem alvo){
         return calcularDano(alvo,this.multiplicadorAtaque2);
+    }
+
+    private int calcularDano(Personagem alvo,double multiplicador){
+        int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*multiplicador-alvo.getDefesa());
+
+        if(dano_causado<1){
+            dano_causado=1;
+        }
+
+        return dano_causado;
     }
 }
