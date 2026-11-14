@@ -160,4 +160,7 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         return true;
     }
 
+    public boolean estaVivo(){
+        return this.vida>0; //se retorna 1 está vivo, true, caso contrário, false, 0
+    }
 }

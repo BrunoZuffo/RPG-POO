@@ -10,7 +10,7 @@ public class Ogro extends Personagem{
     private static final int CUSTO_ATAQUE2=30;
 
     public Ogro(){
-        super(150,150,20,10,30,20);
+        super(120,120,0,30,16,0);
     }
 
     @Override //estamos "sobrescrevendo" um metodo herdado da classe mae - personagem
