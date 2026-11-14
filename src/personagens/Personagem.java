@@ -151,13 +151,12 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         manaAtual-=quantidade;
     }
 
-    protected boolean gastarStamina(int quantidade) {
-        if (staminaAtual<quantidade) {
-            return false;
+    protected void gastarStamina(int quantidade) {
+        if(staminaAtual<quantidade){
+            throw new RecursoInsuficienteException("Stamina insuficiente!");
         }
 
         staminaAtual-=quantidade;
-        return true;
     }
 
     public boolean estaVivo(){
