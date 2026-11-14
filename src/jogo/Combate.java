@@ -21,29 +21,61 @@ public class Combate{
 
         while(jogador.estaVivo() && inimigo.estaVivo()){
 
-            System.out.println("\n========== COMBATE | RODADA "+rodada+" ==========\n");
+            System.out.println("\n================ RPG | RODADA "+rodada+" ================\n");
 
-            System.out.println("JOGADOR - "+jogador.getNome());
-            System.out.println(jogador.getAtributosAtuais());
+            String formato="%-30s | %-30s%n"; //estamos definindo um formato de string para usarmos quando formos printar
+            //as informações do jogador e inimigo
 
-            System.out.println("\nINIMIGO - "+inimigo.getNome());
-            System.out.println(inimigo.getAtributosAtuais());
+            //exibindo os personagens lado a lado
+            System.out.printf(formato,"JOGADOR - "+jogador.getNome(),"INIMIGO - "+inimigo.getNome()); //passamos o formato, entao ele espera 2 strings ( pelo %s 2x na declaração )
+            // e elas sao relacionadas em seguida nesse caso com o JOGADOR e INIMIGO
+            System.out.println("---------------------------------------------------------------");
 
-            System.out.println("\n1 - Ataque basico");
-            System.out.println("Dano: "+jogador.getDanoAtaque1(inimigo)
-                +" | Custo: "+jogador.getCustoAtaque1());
+            System.out.printf(formato,
+                "Vida: "+jogador.getVidaAtual()+"/"+jogador.getVida(),
+                "Vida: "+inimigo.getVidaAtual()+"/"+inimigo.getVida());
 
-            System.out.println("\n2 - Ataque especial");
-            System.out.println("Dano: "+jogador.getDanoAtaque2(inimigo)
-                +" | Custo: "+jogador.getCustoAtaque2());
+            System.out.printf(formato,
+                "Stamina: "+jogador.getStaminaAtual()+"/"+jogador.getStamina(),
+                "Stamina: "+inimigo.getStaminaAtual()+"/"+inimigo.getStamina());
 
-            System.out.println("\n3 - Descansar");
-            System.out.println("Recuperar atributos sem atacar");
+            System.out.printf(formato,
+                "Mana: "+jogador.getManaAtual()+"/"+jogador.getMana(),
+                "Mana: "+inimigo.getManaAtual()+"/"+inimigo.getMana());
 
-            System.out.println("\nRegeneracao por rodada:");
+            System.out.printf(formato,
+                "Dano base: "+jogador.getDano(),
+                "Dano base: "+inimigo.getDano());
+
+            System.out.printf(formato,
+                "Defesa: "+jogador.getDefesa(),
+                "Defesa: "+inimigo.getDefesa());
+
+            //exibindo as acoes disponiveis
+            System.out.println("\n================ ACOES DISPONIVEIS ================\n");
+
+            System.out.printf("%-21s | %-10s | %s%n",
+                "1 - Ataque basico",
+                "Dano: "+jogador.getDanoAtaque1(inimigo),
+                "Custo: "+jogador.getCustoAtaque1());
+
+            System.out.printf("%-21s | %-10s | %s%n",
+                "2 - Ataque especial",
+                "Dano: "+jogador.getDanoAtaque2(inimigo),
+                "Custo: "+jogador.getCustoAtaque2());
+
+            System.out.printf("%-21s | %-10s | %s%n",
+                "3 - Descansar",
+                "Dano: 0",
+                "Sem custo");
+
+            System.out.println("\n============== REGENERACAO POR RODADA ==============\n");
+
             System.out.println(jogador.getRegeneracao());
 
-            System.out.print("\nEscolha: ");
+            System.out.println("\n====================================================");
+
+            System.out.print("\nEscolha sua acao: ");
             int escolha=Entrada.lerInteiro(scanner);
 
             System.out.println("\n--------------- ACOES ---------------");
