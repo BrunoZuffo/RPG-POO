@@ -101,8 +101,8 @@ public class Jogo {
     }
 
     public void aventura(){
-        System.out.println("\nBem-vindo à vila inicial!");
-        System.out.println(jogador.getNome());
+        System.out.println("\nBem-vindo à vila inicial, "+jogado.getNome()+"!");
+        System.out.println("Atributos atuais:");
         System.out.println(jogador.getAtributosAtuais());
 
         Personagem inimigo=new Goblin();
