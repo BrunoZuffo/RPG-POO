@@ -10,7 +10,7 @@ public class Dragão_Ancestral extends Personagem{
     private static final int CUSTO_ATAQUE2=60;
 
     public Dragão_Ancestral(){
-        super(320,200,180,45,25,0);
+        super(320,200,180,45,25,0,1.1,1.8);
         setNome("Dragão Ancestral");
     }
 

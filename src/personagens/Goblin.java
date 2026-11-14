@@ -10,7 +10,7 @@ public class Goblin extends Personagem{
     private static final int CUSTO_ATAQUE2=20;
 
     public Goblin(){
-        super(40,60,0,16,5,0);
+        super(40,60,0,16,5,0,1.0,1.3);
         setNome("Goblin"); //todos os bots precisam disso para terem nomes
         //os nossos personagens criados nao pq o nome é dado por nós no menu também com setNome
     }

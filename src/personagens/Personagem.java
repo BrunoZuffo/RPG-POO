@@ -28,7 +28,7 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         return this.nome;
     }
 
-    public Personagem(int vida, int stamina, int mana, int dano, int defesa, int inventario_tamanho){
+    public Personagem(int vida, int stamina, int mana, int dano, int defesa, int inventario_tamanho, double multiplicadorAtaque1, double multiplicadorAtaque2){
         this.vida=vida;
         this.vida_atual =vida;
         this.stamina=stamina;
@@ -40,6 +40,8 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         this.inventario_tamanho=inventario_tamanho;
         this.item_usando=Item.MAO;
         this.inventario=new ArrayList<>();
+        this.multiplicadorAtaque1=multiplicadorAtaque1;
+        this.multiplicadorAtaque2=multiplicadorAtaque2;
     }
 
     public int getVida(){
@@ -168,4 +170,8 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     public boolean estaVivo(){
         return this.vida_atual>0; //se retorna 1 está vivo, true, caso contrário, false, 0
     }
+
+    private double multiplicadorAtaque1;
+    
+    private double multiplicadorAtaque2;
 }

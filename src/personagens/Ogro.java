@@ -10,7 +10,7 @@ public class Ogro extends Personagem{
     private static final int CUSTO_ATAQUE2=40;
 
     public Ogro(){
-        super(120,120,0,30,16,0);
+        super(120,120,0,30,16,0,1.0,1.6);
         setNome("Ogro");
     }
 

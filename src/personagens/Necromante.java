@@ -10,7 +10,7 @@ public class Necromante extends Personagem{
     private static final int CUSTO_ATAQUE2=40;
 
     public Necromante(){
-        super(80,30,120,32,8,0);
+        super(80,30,120,32,8,0,1.0,1.5);
         setNome("Necromante");
     }
 

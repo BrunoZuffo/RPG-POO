@@ -10,7 +10,7 @@ public class Orc extends Personagem{
     private static final int CUSTO_ATAQUE2=30;
 
     public Orc(){
-        super(85,100,0,25,12,0);
+        super(85,100,0,25,12,0,1.0,1.5);
         setNome("Orc");
     }
 

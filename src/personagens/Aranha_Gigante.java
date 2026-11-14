@@ -10,7 +10,7 @@ public class Aranha_Gigante extends Personagem{
     private static final int CUSTO_ATAQUE2=20;
 
     public Aranha_Gigante(){
-        super(60,80,50,21,7,0);
+        super(60,80,50,21,7,0,1.0,1.3);
         setNome("Aranha Gigante");
     }
 
