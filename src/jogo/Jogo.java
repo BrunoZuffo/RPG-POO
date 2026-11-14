@@ -108,6 +108,19 @@ public class Jogo {
         System.out.println("\nBem-vindo à vila inicial!");
         System.out.println(jogador.getNome());
         System.out.println(jogador.getAtributosAtuais());
+
+        Personagem inimigo=new Goblin();
+
+        Combate combate=new Combate(scanner);
+
+        boolean venceu=combate.iniciar(jogador,inimigo);
+
+        if(venceu){
+            System.out.println("Parabens!! Voce pode continuar sua aventura!");
+        }
+        else{
+            System.out.println("Fim de jogo!");
+        }
     }
 
     public void continuar_jogo(){
