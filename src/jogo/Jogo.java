@@ -129,7 +129,6 @@ public class Jogo {
         System.out.println("Voce se prepara para lutar.");
 
         System.out.println("\nPressione ENTER para iniciar o combate...");
-        scanner.nextLine();
         while(!scanner.nextLine().isEmpty()){
             System.out.println("Pressione apenas ENTER!");
         }
@@ -184,7 +183,6 @@ public class Jogo {
         System.out.println("\nO destino de Eldoria esta prestes a mudar.");
 
         System.out.println("\nPressione ENTER para iniciar sua jornada...");
-        scanner.nextLine();
         while(!scanner.nextLine().isEmpty()){
             System.out.println("Pressione apenas ENTER!");
         }
