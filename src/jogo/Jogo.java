@@ -1,13 +1,21 @@
 package jogo;
 
 import java.util.Scanner;
-import java.util.InputMismatchException;
 
 import personagens.Personagem;
 import personagens.Anão;
 import personagens.Elfo;
 import personagens.Guerreiro;
 import personagens.Mago;
+import personagens.Goblin;
+import personagens.Lobo;
+import personagens.Aranha_Gigante;
+import personagens.Aranha_Rainha;
+import personagens.Dragão_Ancestral;
+import personagens.Gigante_de_Pedra;
+import personagens.Necromante;
+import personagens.Ogro;
+import personagens.Orc;
 
 public class Jogo {
 

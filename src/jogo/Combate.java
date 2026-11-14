@@ -3,8 +3,6 @@ package jogo;
 import personagens.Personagem;
 import excecoes.RecursoInsuficienteException;
 import java.util.Scanner;
-import java.util.InputMismatchException;
-import personagens.Goblin;
 
 public class Combate{
 
