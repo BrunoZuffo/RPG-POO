@@ -178,4 +178,12 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     public double getMultiplicadorAtaque2(){
         return this.multiplicadorAtaque2;
     }
+
+    public int getDanoAtaque1(Personagem alvo){
+        return calcularDano(alvo,this.multiplicadorAtaque1);
+    }
+
+    public int getDanoAtaque2(Personagem alvo){
+        return calcularDano(alvo,this.multiplicadorAtaque2);
+    }
 }
