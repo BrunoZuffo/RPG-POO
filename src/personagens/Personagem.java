@@ -37,7 +37,7 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         return this.nome;
     }
 
-    public Personagem(int vida, int stamina, int mana, int dano, int defesa, int inventario_tamanho, double multiplicadorAtaque1, double multiplicadorAtaque2, int custoAtaque1, int custoAtaque2, String recursoAtaque1, String recursoAtaque2, int regenVida, int regenStamina, int regenMana){
+    public Personagem(int vida, int stamina, int mana, int dano, int defesa, int inventario_tamanho, double multiplicadorAtaque1, double multiplicadorAtaque2, int custoAtaque1, String recursoAtaque1, int custoAtaque2, String recursoAtaque2, int regenVida, int regenStamina, int regenMana){
         this.vida=vida;
         this.vida_atual =vida;
         this.stamina=stamina;
