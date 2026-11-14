@@ -1,6 +1,6 @@
 package personagens;
 
-public class Ogro extends Personagem{
+public class Orc extends Personagem{
     
     private static final int REGEN_VIDA=5;
     private static final int REGEN_MANA=1;
@@ -9,7 +9,7 @@ public class Ogro extends Personagem{
     private static final int CUSTO_ATAQUE1=12;
     private static final int CUSTO_ATAQUE2=30;
 
-    public Ogro(){
+    public Orc(){
         super(120,120,0,30,16,0);
     }
 
