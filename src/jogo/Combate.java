@@ -29,9 +29,9 @@ public class Combate{
             System.out.println("\nINIMIGO - "+inimigo.getNome());
             System.out.println(inimigo.getAtributosAtuais());
 
-            System.out.println("\n1 - Ataque basico");
-            System.out.println("2 - Ataque especial");
-            System.out.println("3 - Descansar");
+            System.out.println("\n1 - Ataque basico | Dano: "+jogador.getDanoAtaque1(inimigo));
+            System.out.println("2 - Ataque especial | Dano: "+jogador.getDanoAtaque2(inimigo));
+            System.out.println("3 - Descansar | Regenerar atributos sem atacar");
 
             System.out.print("\nEscolha: ");
             int escolha=Entrada.lerInteiro(scanner);
