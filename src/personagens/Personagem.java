@@ -3,6 +3,7 @@ package personagens;
 import inventario.Item;
 import java.util.List;
 import java.util.ArrayList;
+import excecoes.RecursoInsuficienteException;
 
 public abstract class Personagem{ //abstract para podermos fazer abstract ataque 1 e 2 pra cada personagem ter o seu
 
@@ -142,13 +143,12 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
 
     public abstract void regenerarAtributos(); // no jogo vamos recuperar os atributos de todos por turno, public facilita
 
-    protected boolean gastarMana(int quantidade) {
-        if (manaAtual<quantidade) {
-            return false;
+    protected void gastarMana(int quantidade) {
+        if(manaAtual<quantidade){
+            throw new RecursoInsuficienteException("Mana insuficiente!");
         }
 
         manaAtual-=quantidade;
-        return true;
     }
 
     protected boolean gastarStamina(int quantidade) {
