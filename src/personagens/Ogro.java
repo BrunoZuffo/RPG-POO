@@ -15,26 +15,20 @@ public class Ogro extends Personagem{
 
     @Override //estamos "sobrescrevendo" um metodo herdado da classe mae - personagem
     public void ataque1(Personagem alvo){
-        if (!gastarStamina(CUSTO_ATAQUE1)) {
-            System.out.println("Stamina insuficiente!");
-            return;
-        }
+        gastarStamina(CUSTO_ATAQUE1);
         int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*1.0-alvo.getDefesa());
         if(dano_causado<0){
-            dano_causado=0;
+            dano_causado=1;
         }
         alvo.setVidaAtual(dano_causado);
     }
 
     @Override 
     public void ataque2(Personagem alvo){
-        if (!gastarStamina(CUSTO_ATAQUE2)) {
-            System.out.println("Stamina insuficiente!");
-            return;
-        }
+        gastarStamina(CUSTO_ATAQUE2);
         int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*1.5-alvo.getDefesa());
         if(dano_causado<0){
-            dano_causado=0;
+            dano_causado=1;
         }
         alvo.setVidaAtual(dano_causado);
     }

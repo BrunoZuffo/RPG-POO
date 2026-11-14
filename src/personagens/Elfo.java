@@ -18,17 +18,17 @@ public class Elfo extends Personagem{
         gastarStamina(CUSTO_ATAQUE1);
         int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*1.0-alvo.getDefesa());
         if(dano_causado<0){
-            dano_causado=0;
+            dano_causado=1;
         }
         alvo.setVidaAtual(dano_causado);
     }
 
     @Override 
     public void ataque2(Personagem alvo){
-        gastarMana(CUSTO_ATAQUE1);
+        gastarMana(CUSTO_ATAQUE2);
         int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*1.5-alvo.getDefesa());
         if(dano_causado<0){
-            dano_causado=0;
+            dano_causado=1;
         }
         alvo.setVidaAtual(dano_causado);
     }
