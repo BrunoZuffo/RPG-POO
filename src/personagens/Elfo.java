@@ -15,10 +15,7 @@ public class Elfo extends Personagem{
 
     @Override 
     public void ataque1(Personagem alvo){
-        if (!gastarStamina(CUSTO_ATAQUE1)) {
-            System.out.println("Stamina insuficiente!");
-            return;
-        }
+        gastarStamina(CUSTO_ATAQUE1);
         int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*1.0-alvo.getDefesa());
         if(dano_causado<0){
             dano_causado=0;
@@ -28,10 +25,7 @@ public class Elfo extends Personagem{
 
     @Override 
     public void ataque2(Personagem alvo){
-        if (!gastarMana(CUSTO_ATAQUE2)) {
-            System.out.println("Mana insuficiente!");
-            return;
-        }
+        gastarMana(CUSTO_ATAQUE1);
         int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*1.5-alvo.getDefesa());
         if(dano_causado<0){
             dano_causado=0;

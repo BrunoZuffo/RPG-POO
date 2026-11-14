@@ -10,7 +10,7 @@ public class Orc extends Personagem{
     private static final int CUSTO_ATAQUE2=30;
 
     public Orc(){
-        super(120,120,0,30,16,0);
+        super(85,100,0,25,12,0);
     }
 
     @Override //estamos "sobrescrevendo" um metodo herdado da classe mae - personagem

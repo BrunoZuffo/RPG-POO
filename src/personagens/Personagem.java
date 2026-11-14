@@ -91,6 +91,10 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     }
 
     public int setVidaAtual(int dano){
+        if(dano<0){
+            throw new IllegalArgumentException("Dano negativo!");
+        }
+
         if((this.vida_atual-dano)<0){
             this.vida_atual=0;
         }
@@ -160,6 +164,6 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     }
 
     public boolean estaVivo(){
-        return this.vidaAtual>0; //se retorna 1 está vivo, true, caso contrário, false, 0
+        return this.vida_atual>0; //se retorna 1 está vivo, true, caso contrário, false, 0
     }
 }
