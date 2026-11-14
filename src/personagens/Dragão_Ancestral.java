@@ -11,6 +11,7 @@ public class Dragão_Ancestral extends Personagem{
 
     public Dragão_Ancestral(){
         super(320,200,180,45,25,0);
+        setNome("Dragão Ancestral");
     }
 
     @Override //estamos "sobrescrevendo" um metodo herdado da classe mae - personagem

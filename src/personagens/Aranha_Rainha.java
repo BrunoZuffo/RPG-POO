@@ -11,6 +11,7 @@ public class Aranha_Rainha extends Personagem{
 
     public Aranha_Rainha(){
         super(180,150,100,35,18,0);
+        setNome("Aranha Rainha");
     }
 
     @Override //estamos "sobrescrevendo" um metodo herdado da classe mae - personagem

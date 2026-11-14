@@ -11,6 +11,7 @@ public class Ogro extends Personagem{
 
     public Ogro(){
         super(120,120,0,30,16,0);
+        setNome("Ogro");
     }
 
     @Override //estamos "sobrescrevendo" um metodo herdado da classe mae - personagem

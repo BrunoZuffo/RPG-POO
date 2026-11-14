@@ -11,6 +11,7 @@ public class Necromante extends Personagem{
 
     public Necromante(){
         super(80,30,120,32,8,0);
+        setNome("Necromante");
     }
 
     @Override //estamos "sobrescrevendo" um metodo herdado da classe mae - personagem

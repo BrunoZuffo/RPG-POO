@@ -11,6 +11,7 @@ public class Gigante_de_Pedra extends Personagem{
 
     public Gigante_de_Pedra(){
         super(230,180,0,38,28,0);
+        setNome("Gigante de Pedra");
     }
 
     @Override //estamos "sobrescrevendo" um metodo herdado da classe mae - personagem
