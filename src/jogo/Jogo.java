@@ -101,7 +101,7 @@ public class Jogo {
     }
 
     public void aventura(){
-        System.out.println("\nBem-vindo à vila inicial, "+jogado.getNome()+"!");
+        System.out.println("\nBem-vindo à vila inicial, "+jogador.getNome()+"!");
         System.out.println("Atributos atuais:");
         System.out.println(jogador.getAtributosAtuais());
 
