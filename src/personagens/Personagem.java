@@ -90,7 +90,12 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     }
 
     public int setVidaAtual(int dano){
-        this.vida_atual-=dano;
+        if((this.vida_atual-dano)<0){
+            this.vida_atual=0;
+        }
+        else{
+            this.vida_atual-=dano;
+        }
         return this.vida_atual;
     }
 
