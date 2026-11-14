@@ -126,7 +126,9 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     }
     
     public String getAtributosAtuais(){
-        return "| Vida Atual: "+ getVidaAtual() +" | Stamina Atual: "+ getStaminaAtual() +"| Mana Atual: "+ getManaAtual();
+        return "Vida: "+getVidaAtual()+"/"+getVida()
+            +" | Stamina: "+getStaminaAtual()+"/"+getStamina()
+            +" | Mana: "+getManaAtual()+"/"+getMana();
     }
 
     public abstract void ataque1(Personagem alvo); //vamos retornar void pq estamos alterando a vida do inimigo diretamente na nossa logica ao inves d decrementar algum valor da vidaAtual do inimigo
