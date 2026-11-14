@@ -12,9 +12,11 @@ import personagens.Mago;
 public class Jogo {
 
     private Scanner scanner;
+    private Personagem jogador;
 
     public Jogo(){
         this.scanner = new Scanner(System.in);
+        this.jogador = null; //fazendo isso podemos acessar jogador a qualquer momento, antes iniciavamos ele só no iniciar()
     }
 
     private int lerInteiro() {
@@ -53,7 +55,6 @@ public class Jogo {
     }
 
     public void iniciar(){
-        Personagem jogador;
         Guerreiro guerreiro=new Guerreiro();
         Mago mago=new Mago();
         Anão anão=new Anão();
@@ -98,6 +99,15 @@ public class Jogo {
         System.out.println("\nPersonagem criado com sucesso!\n"+jogador.getNome()+"- "+jogador.toString());
 
         System.out.println("========================================================");
+
+        //começar a aventura
+        aventura();
+    }
+
+    public void aventura(){
+        System.out.println("\nBem-vindo à vila inicial!");
+        System.out.println(jogador.getNome());
+        System.out.println(jogador.getAtributosAtuais());
     }
 
     public void continuar_jogo(){
