@@ -71,4 +71,8 @@ public enum Item {
     public int getArmazenamentoExtra(){
         return this.armazenamento_extra;
     }
+
+    public String getNome(){
+        return this.nome;
+    }
 }

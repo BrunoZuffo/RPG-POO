@@ -227,4 +227,36 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
             +" | Mana: ate +"+regenMana;
     }
 
+    public String usarItem(int indice){
+        if(indice<0 || indice>=inventario.size()){
+            return "Item invalido!";
+        }
+
+        Item item=inventario.get(indice);
+
+        //verificando se o item e consumivel
+        if(item.getCura()>0){
+
+            if(getVidaAtual()==getVida()){
+                return "Sua vida ja esta cheia!";
+            }
+
+            int vidaAntes=getVidaAtual();
+
+            recuperarVida(item.getCura());
+            inventario.remove(indice);
+
+            return "Voce recuperou "+(getVidaAtual()-vidaAntes)+" de vida!";
+        }
+
+        //verificando se o item e uma arma
+        if(item.getDano()>0){
+            this.item_usando=item;
+
+            return "Voce equipou: "+item.getNome();
+        }
+
+        return "Este item nao precisa ser equipado!";
+    }
+
 }

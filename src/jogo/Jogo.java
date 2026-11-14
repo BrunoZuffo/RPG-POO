@@ -17,6 +17,9 @@ import personagens.Necromante;
 import personagens.Ogro;
 import personagens.Orc;
 
+import inventario.Item;
+import java.util.List;
+
 public class Jogo {
 
     private Scanner scanner;
@@ -155,6 +158,14 @@ public class Jogo {
         System.out.println("Anciao: Mas temo que isso seja apenas o comeco.");
         System.out.println("Anciao: Precisamos descobrir de onde essas");
         System.out.println("criaturas estao vindo.");
+
+        System.out.println("\nAnciao: Aceite estes itens como agradecimento.");
+        System.out.println("Anciao: Eles serao uteis durante sua jornada.");
+
+        System.out.println(jogador.adicionarItem(Item.ADAGA));
+        System.out.println(jogador.adicionarItem(Item.POCAO_PEQUENA));
+
+        menuVila();
     }
 
     public void continuar_jogo(){
@@ -185,6 +196,76 @@ public class Jogo {
         System.out.println("\nPressione ENTER para iniciar sua jornada...");
         while(!scanner.nextLine().isEmpty()){
             System.out.println("Pressione apenas ENTER!");
+        }
+    }
+
+    private void menuInventario(){
+        while(true){
+
+            System.out.println("\n================ INVENTARIO ================");
+
+            System.out.println("Arma equipada: "+jogador.getItemAtual().getNome());
+
+            System.out.println("Espaco utilizado: "+jogador.getEspacoUsado()
+                +"/"+jogador.getTamanhoInventario());
+
+            System.out.println(jogador.getAtributosAtuais());
+
+            List<Item> itens=jogador.getInventario();
+
+            System.out.println("--------------------------------------------");
+
+            for(int i=0;i<itens.size();i++){
+
+                Item item=itens.get(i);
+
+                System.out.println((i+1)+" - "+item.getNome()
+                    +" | Dano: "+item.getDano()
+                    +" | Cura: "+item.getCura()
+                    +" | Espaco: "+item.getTamanho());
+            }
+
+            System.out.println("\n0 - Voltar");
+            System.out.print("\nEscolha um item para utilizar: ");
+
+            int escolha=Entrada.lerInteiro(scanner);
+
+            if(escolha==0){
+                return;
+            }
+
+            System.out.println(jogador.usarItem(escolha-1));
+        }
+    }
+
+    private void menuVila(){
+        while(true){
+
+            System.out.println("\n============ VILA DE VALENFORD ============");
+
+            System.out.println(jogador.getAtributosAtuais());
+
+            System.out.println("\n1 - Abrir inventario");
+            System.out.println("2 - Consultar atributos");
+            System.out.println("0 - Sair do jogo");
+
+            System.out.print("\nEscolha: ");
+
+            int escolha=Entrada.lerInteiro(scanner);
+
+            if(escolha==1){
+                menuInventario();
+            }
+            else if(escolha==2){
+                System.out.println(jogador.toString());
+                System.out.println(jogador.getAtributosAtuais());
+            }
+            else if(escolha==0){
+                return;
+            }
+            else{
+                System.out.println("Escolha invalida!");
+            }
         }
     }
 }
