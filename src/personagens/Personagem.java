@@ -171,7 +171,11 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         return this.vida_atual>0; //se retorna 1 está vivo, true, caso contrário, false, 0
     }
 
-    private double multiplicadorAtaque1;
-    
-    private double multiplicadorAtaque2;
+    public double getMultiplicadorAtaque1(){
+        return this.multiplicadorAtaque1;
+    }
+
+    public double getMultiplicadorAtaque2(){
+        return this.multiplicadorAtaque2;
+    }
 }
