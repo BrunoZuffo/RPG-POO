@@ -4,6 +4,7 @@ import inventario.Item;
 import java.util.List;
 import java.util.ArrayList;
 import excecoes.RecursoInsuficienteException;
+import excecoes.InventarioException;
 
 public abstract class Personagem{ //abstract para podermos fazer abstract ataque 1 e 2 pra cada personagem ter o seu
 
@@ -30,6 +31,9 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     private final int regenMana;
 
     public void setNome(String nome){
+        if(nome==null || nome.isBlank()){
+            throw new IllegalArgumentException("Nome inválido!");
+        }
         this.nome=nome;
     }
 
@@ -105,7 +109,7 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     }
 
     public List<Item> getInventario() {
-        return inventario;
+        return List.copyOf(inventario); //se retornarmos somente o inventario podemos acessar o inventario indiretamente e adicionar coisas la
     }
 
     public int setVidaAtual(int dano){
@@ -154,20 +158,34 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     public abstract void ataque2(Personagem alvo);
 
     protected void recuperarMana(int quantidade){
+        if(quantidade<0){
+            throw new IllegalArgumentException("Recuperação negativa de mana!");
+        }
+
+
         manaAtual=Math.min(mana,quantidade+manaAtual); // evitamos ultrapassar a mana máxima
     }
 
     protected void recuperarStamina(int quantidade){
+        if(quantidade<0){
+            throw new IllegalArgumentException("Recuperação negativa de stamina!");
+        }
         staminaAtual=Math.min(stamina,quantidade+staminaAtual);
     }
 
     protected void recuperarVida(int quantidade){
+        if(quantidade<0){
+            throw new IllegalArgumentException("Recuperação negativa de vida");
+        }
         vida_atual=Math.min(vida,quantidade+vida_atual);
     }
 
     public abstract void regenerarAtributos(); // no jogo vamos recuperar os atributos de todos por turno, public facilita
 
     protected void gastarMana(int quantidade) {
+        if(quantidade<0){
+            throw new IllegalArgumentException("Quantidade negativa de mana!");
+        }
         if(manaAtual<quantidade){
             throw new RecursoInsuficienteException("Mana insuficiente!");
         }
@@ -176,6 +194,9 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     }
 
     protected void gastarStamina(int quantidade) {
+        if(quantidade<0){
+            throw new IllegalArgumentException("Quantidade negativa de Stamina!");
+        }
         if(staminaAtual<quantidade){
             throw new RecursoInsuficienteException("Stamina insuficiente!");
         }
@@ -229,7 +250,7 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
 
     public String usarItem(int indice){
         if(indice<0 || indice>=inventario.size()){
-            return "Item invalido!";
+            throw new InventarioException("Item invalido!");
         }
 
         Item item=inventario.get(indice);
@@ -257,6 +278,20 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         }
 
         return "Este item nao precisa ser equipado!";
+    }
+
+    public String adicionarItem(Item item){
+        if(item==null){
+            throw new IllegalArgumentException("Item nulo!");
+        }
+
+        if(getEspacoUsado()+item.getTamanho()>getTamanhoInventario()+item.getArmazenamentoExtra()){
+            throw new InventarioException("Espaco insuficiente no inventario!");
+        }
+
+        inventario.add(item);
+
+        return "Item coletado: "+item.getNome();
     }
 
 }

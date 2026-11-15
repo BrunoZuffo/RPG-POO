@@ -19,6 +19,7 @@ import personagens.Orc;
 
 import inventario.Item;
 import java.util.List;
+import excecoes.InventarioException;
 
 public class Jogo {
 
@@ -162,8 +163,8 @@ public class Jogo {
         System.out.println("\nAnciao: Aceite estes itens como agradecimento.");
         System.out.println("Anciao: Eles serao uteis durante sua jornada.");
 
-        System.out.println(jogador.adicionarItem(Item.ADAGA));
-        System.out.println(jogador.adicionarItem(Item.POCAO_PEQUENA));
+        receberItem(Item.ADAGA);
+        receberItem(Item.POCAO_PEQUENA);
 
         menuVila();
     }
@@ -234,7 +235,12 @@ public class Jogo {
                 return;
             }
 
-            System.out.println(jogador.usarItem(escolha-1));
+            try{
+                System.out.println(jogador.usarItem(escolha-1));
+            }
+            catch(InventarioException erro){
+                System.out.println(erro.getMessage());
+            }
         }
     }
 
@@ -268,4 +274,14 @@ public class Jogo {
             }
         }
     }
+
+    private void receberItem(Item item){ //generalizar para nao ficar add sempre
+        try{
+            System.out.println(jogador.adicionarItem(item));
+        }
+        catch(InventarioException erro){
+            System.out.println(erro.getMessage());
+        }
+    }
+
 }
