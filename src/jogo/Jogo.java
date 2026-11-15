@@ -283,6 +283,15 @@ public class Jogo {
             System.out.println("2 - Consultar atributos");
             System.out.println("3 - Descansar na taverna (5 ouro)");
             System.out.println("4 - Explorar a Floresta Sombria");
+            if(etapaFloresta<2){
+                System.out.println("5 - Covil das Aranhas (Bloqueado)");
+            }
+            else if(etapaFloresta==2){
+                System.out.println("5 - Explorar o Covil das Aranhas");
+            }
+            else{
+                System.out.println("5 - Covil das Aranhas (Concluido)");
+            }
             System.out.println("0 - Sair do jogo");
 
             System.out.print("\nEscolha: ");
@@ -300,6 +309,9 @@ public class Jogo {
             }
             else if(escolha==4){
                 explorarFloresta();
+            }
+            else if(escolha==5&&etapaFloresta==2){
+                explorarCovil();
             }
             else if(escolha==0){
                 return;
@@ -357,7 +369,7 @@ public class Jogo {
     }
 
     private void explorarFloresta(){
-        if(etapaFloresta==2){
+        if(etapaFloresta>=2){
             System.out.println("\nVoce ja investigou esta regiao!");
             return;
         }
@@ -493,6 +505,87 @@ public class Jogo {
 
         while(!scanner.nextLine().isEmpty()){
             System.out.println("Pressione apenas ENTER!");
+        }
+    }
+
+    private void explorarCovil(){
+        if(etapaFloresta<2){
+            System.out.println("Voce ainda precisa investigar a floresta!");
+            return;
+        }
+
+        if(etapaFloresta==3){
+            System.out.println("A Aranha Rainha ja foi derrotada!");
+            return;
+        }
+
+        System.out.println("\n============== CAPITULO 3 ==============");
+        System.out.println("             COVIL DAS ARANHAS");
+        System.out.println("========================================");
+
+        System.out.println("\nAnciao: Existe algo estranho naquela caverna.");
+        System.out.println("Anciao: Essas criaturas nao pertencem a nossa floresta.");
+        System.out.println("Anciao: Prepare-se antes de partir!");
+
+        while(jogador.estaVivo()){
+
+            System.out.println("\n============ COVIL DAS ARANHAS ============");
+
+            System.out.println(jogador.getAtributosAtuais());
+            System.out.println(jogador.getProgresso());
+
+            System.out.println("\n1 - Entrar na caverna");
+            System.out.println("2 - Abrir inventario");
+            System.out.println("0 - Retornar para a vila");
+
+            System.out.print("\nEscolha: ");
+
+            int escolha=Entrada.lerInteiro(scanner);
+
+            if(escolha==0){
+                return;
+            }
+            else if(escolha==2){
+                menuInventario();
+            }
+            else if(escolha==1){
+
+                System.out.println("\nVoce entra lentamente na caverna.");
+                System.out.println("O chao esta coberto por ossos e teias.");
+
+                System.out.println("\nUma enorme criatura surge da escuridao.");
+                System.out.println("Seus olhos brilham com uma estranha energia.");
+
+                System.out.println("\nA ARANHA RAINHA DESPERTOU!");
+
+                if(!realizarEncontro(new Aranha_Rainha(),250,150)){
+                    return;
+                }
+
+                etapaFloresta=3;
+
+                receberItem(Item.POCAO_GRANDE);
+                receberItem(Item.BOLSA_PEQUENA);
+
+                System.out.println("\n========== BOSS DERROTADO ==========");
+
+                System.out.println("\nCom a criatura derrotada,");
+                System.out.println("voce encontra um simbolo gravado nas paredes.");
+
+                System.out.println("Uma estranha magia emana daquele simbolo.");
+
+                System.out.println("\nAo retornar para Valenford,");
+                System.out.println("o anciao reconhece o simbolo.");
+
+                System.out.println("\nAnciao: Ja vi essa marca antes...");
+                System.out.println("Anciao: Nas antigas ruinas das montanhas.");
+                System.out.println("Anciao: Talvez a origem de tudo esteja la.");
+
+                return;
+            }
+            else{
+                System.out.println("Escolha invalida!");
+            }
         }
     }
 
