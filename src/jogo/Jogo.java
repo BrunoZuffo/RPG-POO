@@ -26,6 +26,7 @@ public class Jogo {
 
     private Scanner scanner;
     private Personagem jogador;
+    private Combate combate;
 
     //para se ele voltar para a vila sabermos onde voltar na floresta
     private int etapaFloresta=0;
@@ -33,6 +34,7 @@ public class Jogo {
     public Jogo(){
         this.scanner = new Scanner(System.in);
         this.jogador = null; //fazendo isso podemos acessar jogador a qualquer momento, antes iniciavamos ele só no iniciar()
+        this.combate = new Combate(scanner);
     }
 
     public void menu(){
@@ -156,7 +158,7 @@ public class Jogo {
 
         Personagem inimigo=new Goblin();
 
-        if(!enfrentarInimigo(inimigo,40,20)){
+        if(!realizarEncontro(inimigo,40,20)){
             return;
         }
 
@@ -339,7 +341,7 @@ public class Jogo {
         System.out.println("\n"+jogador.getProgresso());
     }
 
-    private boolean enfrentarInimigo(Personagem inimigo,int xp,int ouro){
+    private boolean realizarEncontro(Personagem inimigo,int xp,int ouro){
         Combate combate=new Combate(scanner);
 
         boolean venceu=combate.iniciar(jogador,inimigo);
@@ -402,7 +404,7 @@ public class Jogo {
                     System.out.println("Um rosnado rompe o silencio da floresta.");
                     System.out.println("Um lobo surge entre as arvores!");
 
-                    if(!enfrentarInimigo(new Lobo(),50,25)){
+                    if(!realizarEncontro(new Lobo(),50,25)){
                         return;
                     }
 
@@ -421,7 +423,7 @@ public class Jogo {
 
                     System.out.println("\nDe repente, uma criatura desce das arvores!");
 
-                    if(!enfrentarInimigo(new Aranha_Gigante(),75,40)){
+                    if(!realizarEncontro(new Aranha_Gigante(),75,40)){
                         return;
                     }
 
