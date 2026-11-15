@@ -26,6 +26,9 @@ public class Jogo {
     private Scanner scanner;
     private Personagem jogador;
 
+    //para se ele voltar para a vila sabermos onde voltar na floresta
+    private int etapaFloresta=0;
+
     public Jogo(){
         this.scanner = new Scanner(System.in);
         this.jogador = null; //fazendo isso podemos acessar jogador a qualquer momento, antes iniciavamos ele só no iniciar()
@@ -100,7 +103,9 @@ public class Jogo {
 
         System.out.println("========================================================");
 
+
         //começar a aventura
+        etapaFloresta=0;
         aventura();
     }
 
@@ -149,16 +154,7 @@ public class Jogo {
         }
 
         Personagem inimigo=new Goblin();
-
-        Combate combate=new Combate(scanner);
-
-        boolean venceu=combate.iniciar(jogador,inimigo);
-
-        if(!venceu){
-            System.out.println("\nSua jornada terminou antes mesmo de comecar.");
-            System.out.println("Fim de jogo!");
-            return;
-        }
+        enfrentarInimigo(inimigo, 40,20);
 
         System.out.println("\n============================================");
         System.out.println("               A VILA ESTA SALVA!");
@@ -176,8 +172,6 @@ public class Jogo {
 
         receberItem(Item.ADAGA);
         receberItem(Item.POCAO_PEQUENA);
-
-        recompensarVitoria(40,20);
 
         menuVila();
     }
@@ -272,7 +266,7 @@ public class Jogo {
     }
 
     private void menuVila(){
-        while(true){
+        while(jogador.estaVivo()){
 
             System.out.println("\n============ VILA DE VALENFORD ============");
 
@@ -281,6 +275,7 @@ public class Jogo {
 
             System.out.println("\n1 - Abrir inventario");
             System.out.println("2 - Consultar atributos");
+            System.out.println("3 - Explorar a Floresta Sombria");
             System.out.println("0 - Sair do jogo");
 
             System.out.print("\nEscolha: ");
@@ -294,6 +289,9 @@ public class Jogo {
                 System.out.println(jogador.toString());
                 System.out.println(jogador.getAtributosAtuais());
                 System.out.println(jogador.getProgresso());
+            }
+            else if(escolha==3){
+                explorarFloresta();
             }
             else if(escolha==0){
                 return;
@@ -333,6 +331,112 @@ public class Jogo {
         }
 
         System.out.println("\n"+jogador.getProgresso());
+    }
+
+    private boolean enfrentarInimigo(Personagem inimigo,int xp,int ouro){
+        Combate combate=new Combate(scanner);
+
+        boolean venceu=combate.iniciar(jogador,inimigo);
+
+        if(!venceu){
+            System.out.println("\nSua jornada chegou ao fim...");
+            System.out.println("Fim de jogo!");
+            return false;
+        }
+
+        recompensarVitoria(xp,ouro);
+
+        return true;
+    }
+
+    private void explorarFloresta(){
+        if(etapaFloresta==2){
+            System.out.println("\nVoce ja investigou esta regiao!");
+            return;
+        }
+
+        System.out.println("\n============== CAPITULO 2 ==============");
+        System.out.println("             FLORESTA SOMBRIA");
+        System.out.println("========================================");
+
+        System.out.println("\nAo deixar Valenford, voce segue uma trilha");
+        System.out.println("cercada por arvores antigas e uma nevoa intensa.");
+
+        while(jogador.estaVivo()){
+
+            System.out.println("\n=========== FLORESTA SOMBRIA ===========");
+
+            System.out.println(jogador.getAtributosAtuais());
+            System.out.println(jogador.getProgresso());
+
+            if(etapaFloresta==0){
+                System.out.println("\n1 - Investigar a trilha");
+            }
+            else if(etapaFloresta==1){
+                System.out.println("\n1 - Avancar para a floresta profunda");
+            }
+
+            System.out.println("2 - Abrir inventario");
+            System.out.println("0 - Retornar para a vila");
+
+            System.out.print("\nEscolha: ");
+            int escolha=Entrada.lerInteiro(scanner);
+
+            if(escolha==0){
+                return;
+            }
+            else if(escolha==2){
+                menuInventario();
+            }
+            else if(escolha==1){
+
+                if(etapaFloresta==0){
+
+                    System.out.println("\nVoce encontra rastros de sangue na trilha.");
+                    System.out.println("Um rosnado rompe o silencio da floresta.");
+                    System.out.println("Um lobo surge entre as arvores!");
+
+                    if(!enfrentarInimigo(new Lobo(),50,25)){
+                        return;
+                    }
+
+                    etapaFloresta=1;
+
+                    receberItem(Item.ERVA_MEDICINAL);
+
+                    System.out.println("\nCom o caminho livre, voce encontra");
+                    System.out.println("uma carruagem abandonada.");
+                    System.out.println("Estranhas teias cobrem toda sua superficie.");
+                }
+                else if(etapaFloresta==1){
+
+                    System.out.println("\nVoce segue os rastros da carruagem.");
+                    System.out.println("As teias tornam-se cada vez maiores.");
+
+                    System.out.println("\nDe repente, uma criatura desce das arvores!");
+
+                    if(!enfrentarInimigo(new Aranha_Gigante(),75,40)){
+                        return;
+                    }
+
+                    etapaFloresta=2;
+
+                    receberItem(Item.POCAO_MEDIA);
+
+                    System.out.println("\nVoce encontra a entrada de uma caverna.");
+                    System.out.println("Centenas de ovos cobrem suas paredes.");
+                    System.out.println("Algo muito maior se esconde la dentro...");
+
+                    System.out.println("\nVoce decide retornar para Valenford");
+                    System.out.println("e contar ao anciao o que descobriu.");
+
+                    return;
+                }
+            }
+            else{
+                System.out.println("Escolha invalida!");
+            }
+        }
     }
 
 }
