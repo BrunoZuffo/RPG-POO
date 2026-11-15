@@ -237,7 +237,7 @@ public class Jogo {
 
             System.out.println(jogador.getAtributosAtuais());
             System.out.println(jogador.getProgresso());
-            
+
 
             List<Item> itens=jogador.getInventario();
 
@@ -277,6 +277,7 @@ public class Jogo {
             System.out.println("\n============ VILA DE VALENFORD ============");
 
             System.out.println(jogador.getAtributosAtuais());
+            System.out.println(jogador.getProgresso());
 
             System.out.println("\n1 - Abrir inventario");
             System.out.println("2 - Consultar atributos");
