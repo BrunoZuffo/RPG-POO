@@ -20,6 +20,7 @@ import personagens.Orc;
 import inventario.Item;
 import java.util.List;
 import excecoes.InventarioException;
+import excecoes.RecursoInsuficienteException;
 
 public class Jogo {
 
@@ -154,7 +155,10 @@ public class Jogo {
         }
 
         Personagem inimigo=new Goblin();
-        enfrentarInimigo(inimigo, 40,20);
+
+        if(!enfrentarInimigo(inimigo,40,20)){
+            return;
+        }
 
         System.out.println("\n============================================");
         System.out.println("               A VILA ESTA SALVA!");
@@ -275,7 +279,8 @@ public class Jogo {
 
             System.out.println("\n1 - Abrir inventario");
             System.out.println("2 - Consultar atributos");
-            System.out.println("3 - Explorar a Floresta Sombria");
+            System.out.println("3 - Descansar na taverna (5 ouro)");
+            System.out.println("4 - Explorar a Floresta Sombria");
             System.out.println("0 - Sair do jogo");
 
             System.out.print("\nEscolha: ");
@@ -286,11 +291,12 @@ public class Jogo {
                 menuInventario();
             }
             else if(escolha==2){
-                System.out.println(jogador.toString());
-                System.out.println(jogador.getAtributosAtuais());
-                System.out.println(jogador.getProgresso());
+                consultarAtributos();
             }
             else if(escolha==3){
+                descansarNaVila();
+            }
+            else if(escolha==4){
                 explorarFloresta();
             }
             else if(escolha==0){
@@ -436,6 +442,56 @@ public class Jogo {
             else{
                 System.out.println("Escolha invalida!");
             }
+        }
+    }
+
+    private void descansarNaVila(){
+        int custo=5;
+
+        if(jogador.getVidaAtual()==jogador.getVida()
+            && jogador.getStaminaAtual()==jogador.getStamina()
+            && jogador.getManaAtual()==jogador.getMana()){
+
+            System.out.println("Seus atributos ja estao cheios!");
+            return;
+        }
+
+        try{
+            jogador.gastarOuro(custo);
+            jogador.descansar();
+
+            System.out.println("\nVoce descansou na taverna!");
+            System.out.println("Todos os atributos foram recuperados.");
+            System.out.println("Ouro gasto: "+custo);
+        }
+        catch(RecursoInsuficienteException erro){
+            System.out.println(erro.getMessage());
+        }
+    }
+
+    private void consultarAtributos(){
+        System.out.println("\n============ FICHA DO PERSONAGEM ============");
+
+        System.out.println("Nome: "+jogador.getNome());
+        System.out.println("Classe: "+jogador.getClass().getSimpleName());
+        System.out.println("Arma equipada: "+jogador.getItemAtual().getNome());
+
+        System.out.println("Dano base: "+jogador.getDano());
+        System.out.println("Bonus da arma: "+jogador.getItemAtual().getDano());
+
+        System.out.println("Dano total: "
+            +(jogador.getDano()+jogador.getItemAtual().getDano()));
+
+        System.out.println("Defesa: "+jogador.getDefesa());
+
+        System.out.println("\nRegeneracao por rodada:");
+        System.out.println(jogador.getRegeneracao());
+
+        System.out.println("\nPressione ENTER para voltar...");
+        scanner.nextLine();
+
+        while(!scanner.nextLine().isEmpty()){
+            System.out.println("Pressione apenas ENTER!");
         }
     }
 

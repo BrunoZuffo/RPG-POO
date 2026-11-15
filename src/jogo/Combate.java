@@ -108,6 +108,8 @@ public class Combate{
             }
 
             if(!inimigo.estaVivo()){
+                jogador.regenerarAtributos();
+                System.out.println("Atributos regenerados.");
                 break;
             }
 

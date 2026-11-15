@@ -360,4 +360,27 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
             +" | Ouro: "+ouro;
     }
 
+    public void gastarOuro(int quantidade){
+        if(quantidade<0){
+            throw new IllegalArgumentException("Quantidade negativa de ouro!");
+        }
+
+        if(ouro<quantidade){
+            throw new RecursoInsuficienteException("Ouro insuficiente!");
+        }
+
+        ouro-=quantidade;
+    }
+
+    public void descansar(){
+
+        if(!estaVivo()){
+            throw new IllegalStateException("Personagem derrotado!");
+        }
+
+        vida_atual=vida;
+        manaAtual=mana;
+        staminaAtual=stamina;
+    }
+
 }
