@@ -65,9 +65,10 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         this.regenVida=regenVida;
         this.regenStamina=regenStamina;
         this.regenMana=regenMana;
-        this.nivel=nivel;
-        this.experiencia=experiencia;
-        this.ouro=ouro;
+        //nao precisamos desses 3 pq ja inicializamos com valores la atras, como //private int nivel=1, etc
+        //this.nivel=nivel;
+        //this.experiencia=experiencia;
+        //this.ouro=ouro;
     }
 
     public int getVida(){
