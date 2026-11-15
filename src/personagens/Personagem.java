@@ -2,7 +2,7 @@ package personagens;
 
 import inventario.Item;
 import java.util.List;
-import java.util.ArrayList;
+import inventario.Inventario;
 import excecoes.RecursoInsuficienteException;
 import excecoes.InventarioException;
 
@@ -17,9 +17,8 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     private int staminaAtual;
     private int mana;
     private int manaAtual;
-    private int inventario_tamanho;
     private Item item_usando;
-    private List<Item> inventario=new ArrayList<>();
+    private Inventario inventario;
     private double multiplicadorAtaque1;
     private double multiplicadorAtaque2;
     private final int custoAtaque1;
@@ -53,9 +52,8 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         this.staminaAtual=stamina; // idem
         this.dano=dano;
         this.defesa=defesa;
-        this.inventario_tamanho=inventario_tamanho;
         this.item_usando=Item.MAO;
-        this.inventario=new ArrayList<>();
+        this.inventario=new Inventario(inventario_tamanho);
         this.multiplicadorAtaque1=multiplicadorAtaque1;
         this.multiplicadorAtaque2=multiplicadorAtaque2;
         this.custoAtaque1=custoAtaque1;
@@ -81,23 +79,7 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
 
     public int getDefesa(){
         return this.defesa;
-    }
-
-    public int getTamanhoInventario(){
-        int inventario_TamanhoTotal=this.inventario_tamanho;
-        for(Item item: inventario){
-            inventario_TamanhoTotal+=item.getArmazenamentoExtra();
-        }
-        return inventario_TamanhoTotal;
-    }
-
-    public int getEspacoUsado(){
-        int espacoUsado=0;
-        for(Item item: inventario){
-            espacoUsado+=item.getTamanho();
-        }
-        return espacoUsado;
-    }    
+    } 
 
     public int getVidaAtual(){
         return this.vida_atual;
@@ -107,9 +89,6 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         return this.item_usando;
     }
 
-    public List<Item> getInventario() {
-        return List.copyOf(inventario); //se retornarmos somente o inventario podemos acessar o inventario indiretamente e adicionar coisas la
-    }
 
     public int setVidaAtual(int dano){
         if(dano<0){
@@ -247,29 +226,33 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
             +" | Mana: ate +"+regenMana;
     }
 
+    public String usarConsumivel(int indice){
+        Item item=inventario.getItem(indice);
+
+        if(item.getCura()<=0){
+            throw new InventarioException("Este item nao e consumivel!");
+        }
+
+        if(getVidaAtual()==getVida()){
+            throw new InventarioException("Sua vida ja esta cheia!");
+        }
+
+        int vidaAntes=getVidaAtual();
+
+        inventario.removerConsumivel(indice);
+
+        recuperarVida(item.getCura());
+
+        return "Voce recuperou "+(getVidaAtual()-vidaAntes)+" de vida!";
+    }
+
     public String usarItem(int indice){
-        if(indice<0 || indice>=inventario.size()){
-            throw new InventarioException("Item invalido!");
-        }
+        Item item=inventario.getItem(indice);
 
-        Item item=inventario.get(indice);
-
-        //verificando se o item e consumivel
         if(item.getCura()>0){
-
-            if(getVidaAtual()==getVida()){
-                return "Sua vida ja esta cheia!";
-            }
-
-            int vidaAntes=getVidaAtual();
-
-            recuperarVida(item.getCura());
-            inventario.remove(indice);
-
-            return "Voce recuperou "+(getVidaAtual()-vidaAntes)+" de vida!";
+            return usarConsumivel(indice);
         }
 
-        //verificando se o item e uma arma
         if(item.getDano()>0){
             this.item_usando=item;
 
@@ -279,16 +262,20 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         return "Este item nao precisa ser equipado!";
     }
 
+    public int getTamanhoInventario(){
+        return inventario.getCapacidade();
+    }
+
+    public int getEspacoUsado(){
+        return inventario.getEspacoUsado();
+    }
+
+    public List<Item> getInventario(){
+        return inventario.getItens();
+    }
+
     public String adicionarItem(Item item){
-        if(item==null){
-            throw new IllegalArgumentException("Item nulo!");
-        }
-
-        if(getEspacoUsado()+item.getTamanho()>getTamanhoInventario()+item.getArmazenamentoExtra()){
-            throw new InventarioException("Espaco insuficiente no inventario!");
-        }
-
-        inventario.add(item);
+        inventario.adicionarItem(item);
 
         return "Item coletado: "+item.getNome();
     }

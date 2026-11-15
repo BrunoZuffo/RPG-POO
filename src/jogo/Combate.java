@@ -3,6 +3,9 @@ package jogo;
 import personagens.Personagem;
 import excecoes.RecursoInsuficienteException;
 import java.util.Scanner;
+import inventario.Item;
+import java.util.List;
+import excecoes.InventarioException;
 
 public class Combate{
 
@@ -69,6 +72,8 @@ public class Combate{
                 "Dano: 0",
                 "Sem custo");
 
+            System.out.println("4 - Utilizar consumivel");
+
             System.out.println("\n============== REGENERACAO POR RODADA ==============\n");
 
             System.out.println(jogador.getRegeneracao());
@@ -92,12 +97,17 @@ public class Combate{
                 else if(escolha==3){
                     System.out.println("Voce decidiu descansar neste turno.");
                 }
+                else if(escolha==4){
+                    if(!escolherConsumivel(jogador)){
+                        continue;
+                    }
+                }
                 else{
                     System.out.println("Escolha invalida!");
                     continue;
                 }
             }
-            catch(RecursoInsuficienteException erro){
+            catch(RecursoInsuficienteException | InventarioException erro){
                 System.out.println(erro.getMessage());
                 continue;
             }
@@ -178,6 +188,46 @@ public class Combate{
                 System.out.println(inimigo.getNome()+" precisou descansar!");
             }
         }
+    }
+
+    private boolean escolherConsumivel(Personagem jogador){
+        List<Item> itens=jogador.getInventario();
+
+        boolean possuiConsumivel=false;
+
+        System.out.println("\n========== CONSUMIVEIS ==========");
+
+        for(int i=0;i<itens.size();i++){
+
+            Item item=itens.get(i);
+
+            if(item.getCura()>0){
+
+                System.out.println((i+1)+" - "+item.getNome()
+                    +" | Cura: "+item.getCura());
+
+                possuiConsumivel=true;
+            }
+        }
+
+        if(!possuiConsumivel){
+            System.out.println("Voce nao possui consumiveis!");
+            return false;
+        }
+
+        System.out.println("0 - Voltar");
+
+        System.out.print("\nEscolha: ");
+
+        int escolha=Entrada.lerInteiro(scanner);
+
+        if(escolha==0){
+            return false;
+        }
+
+        System.out.println(jogador.usarConsumivel(escolha-1));
+
+        return true;
     }
 
 }
