@@ -32,9 +32,9 @@ public class Jogo {
     private int etapaFloresta=0;
 
     public Jogo(){
-        this.scanner = new Scanner(System.in);
+        this.scanner = new Scanner(System.in); //criamos um objeto da classe Scanner responsavel por ler a entrada do terminal
         this.jogador = null; //fazendo isso podemos acessar jogador a qualquer momento, antes iniciavamos ele só no iniciar()
-        this.combate = new Combate(scanner);
+        this.combate = new Combate(scanner); //passando o scanner que ja existe em Jogo para o combate para evitar inicializar mais um
     }
 
     public void menu(){
@@ -342,7 +342,6 @@ public class Jogo {
     }
 
     private boolean realizarEncontro(Personagem inimigo,int xp,int ouro){
-        Combate combate=new Combate(scanner);
 
         boolean venceu=combate.iniciar(jogador,inimigo);
 
