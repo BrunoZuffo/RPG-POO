@@ -310,7 +310,7 @@ public class Jogo {
             else if(escolha==4){
                 explorarFloresta();
             }
-            else if(escolha==5&&etapaFloresta==2){
+            else if(escolha==5){
                 explorarCovil();
             }
             else if(escolha==0){
