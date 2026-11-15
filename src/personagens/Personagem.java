@@ -29,6 +29,9 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
     private final int regenVida;
     private final int regenStamina;
     private final int regenMana;
+    private int nivel=1;
+    private int experiencia=0;
+    private int ouro=0;
 
     public void setNome(String nome){
         if(nome==null || nome.isBlank()){
@@ -41,7 +44,7 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         return this.nome;
     }
 
-    public Personagem(int vida, int stamina, int mana, int dano, int defesa, int inventario_tamanho, double multiplicadorAtaque1, double multiplicadorAtaque2, int custoAtaque1, String recursoAtaque1, int custoAtaque2, String recursoAtaque2, int regenVida, int regenStamina, int regenMana){
+    public Personagem(int vida, int stamina, int mana, int dano, int defesa, int inventario_tamanho, double multiplicadorAtaque1, double multiplicadorAtaque2, int custoAtaque1, String recursoAtaque1, int custoAtaque2, String recursoAtaque2, int regenVida, int regenStamina, int regenMana, int nivel, int experiencia, int ouro){
         this.vida=vida;
         this.vida_atual =vida;
         this.stamina=stamina;
@@ -62,6 +65,9 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         this.regenVida=regenVida;
         this.regenStamina=regenStamina;
         this.regenMana=regenMana;
+        this.nivel=nivel;
+        this.experiencia=experiencia;
+        this.ouro=ouro;
     }
 
     public int getVida(){
@@ -284,6 +290,73 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         inventario.add(item);
 
         return "Item coletado: "+item.getNome();
+    }
+
+    public int getNivel(){
+        return this.nivel;
+    }
+
+    public int getExperiencia(){
+        return this.experiencia;
+    }
+
+    public int getOuro(){
+        return this.ouro;
+    }
+
+    public int getXpParaProximoNivel(){
+        return 100+50*(getNivel()-1);
+    }
+
+    private void subirNivel(){
+        nivel++;
+
+        int aumentoVida=(int)Math.round(vida*0.15);
+        int aumentoMana=(int)Math.round(mana*0.10);
+        int aumentoStamina=(int)Math.round(stamina*0.10);
+
+        //aumentando os atributos maximos
+        vida+=aumentoVida;
+        mana+=aumentoMana;
+        stamina+=aumentoStamina;
+
+        dano+=(int)Math.round(dano*0.15);
+        defesa+=(int)Math.round(defesa*0.10);
+
+        //aumentando tambem os atributos atuais
+        vida_atual+=aumentoVida;
+        manaAtual+=aumentoMana;
+        staminaAtual+=aumentoStamina;
+    }
+
+    public void ganharExperiencia(int quantidade){
+        if(quantidade<0){
+            throw new IllegalArgumentException("Experiencia negativa!");
+        }
+
+        experiencia+=quantidade;
+
+        //ja que podemos subir mais d 1 nivel de uma vez, temos que usar laco de repeticao
+        while(experiencia>=getXpParaProximoNivel()){
+            //gastando o xp
+            experiencia-=getXpParaProximoNivel();
+
+            subirNivel();
+        }
+    }
+    
+    public void ganharOuro(int quantidade){
+        if(quantidade<0){
+            throw new IllegalArgumentException("Quantidade negativa de ouro!");
+        }
+        ouro+=quantidade;
+    }
+
+    //semelhante ao get atributos atuais
+    public String getProgresso(){
+        return "Nivel: "+nivel
+            +" | XP: "+experiencia+"/"+getXpParaProximoNivel()
+            +" | Ouro: "+ouro;
     }
 
 }

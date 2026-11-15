@@ -104,6 +104,17 @@ public class Jogo {
         aventura();
     }
 
+
+
+
+
+
+
+
+
+
+
+    //========================JOGO====================================
     public void aventura(){
         introducao();
 
@@ -166,9 +177,23 @@ public class Jogo {
         receberItem(Item.ADAGA);
         receberItem(Item.POCAO_PEQUENA);
 
+        recompensarVitoria(40,20);
+
         menuVila();
     }
 
+
+
+
+
+
+
+
+
+
+
+
+    //mais funcoes
     public void continuar_jogo(){
         
     }
@@ -211,6 +236,8 @@ public class Jogo {
                 +"/"+jogador.getTamanhoInventario());
 
             System.out.println(jogador.getAtributosAtuais());
+            System.out.println(jogador.getProgresso());
+            
 
             List<Item> itens=jogador.getInventario();
 
@@ -265,6 +292,7 @@ public class Jogo {
             else if(escolha==2){
                 System.out.println(jogador.toString());
                 System.out.println(jogador.getAtributosAtuais());
+                System.out.println(jogador.getProgresso());
             }
             else if(escolha==0){
                 return;
@@ -282,6 +310,28 @@ public class Jogo {
         catch(InventarioException erro){
             System.out.println(erro.getMessage());
         }
+    }
+
+    //metodo reutilizavel de novo para facilitar na hora do jogo
+    private void recompensarVitoria(int xp,int ouro){
+        int nivelAntes=jogador.getNivel();
+
+        jogador.ganharExperiencia(xp);
+        jogador.ganharOuro(ouro);
+
+        System.out.println("\n============== RECOMPENSAS ==============");
+
+        System.out.println("Experiencia recebida: +"+xp+" XP");
+        System.out.println("Ouro recebido: +"+ouro);
+
+        if(jogador.getNivel()>nivelAntes){
+
+            System.out.println("\nLEVEL UP!");
+            System.out.println("Voce alcancou o nivel "+jogador.getNivel()+"!");
+            System.out.println("Seus atributos foram melhorados!");
+        }
+
+        System.out.println("\n"+jogador.getProgresso());
     }
 
 }
