@@ -84,14 +84,6 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         return inventario_TamanhoTotal;
     }
 
-    public String adicionarItem(Item item){
-        if(getEspacoUsado()+item.getTamanho()>getTamanhoInventario()+item.getArmazenamentoExtra()){
-            return "Espaco insuficiente no inventário";
-        }
-        inventario.add(item);
-        return "Espaco coletado";
-    }
-
     public int getEspacoUsado(){
         int espacoUsado=0;
         for(Item item: inventario){
