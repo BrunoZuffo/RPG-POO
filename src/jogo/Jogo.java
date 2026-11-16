@@ -16,6 +16,11 @@ import personagens.Gigante_de_Pedra;
 import personagens.Necromante;
 import personagens.Ogro;
 import personagens.Orc;
+import personagens.Ladino;
+import personagens.Paladino;
+import personagens.Barbaro;
+import personagens.Druida;
+import personagens.Monge;
 
 import inventario.Item;
 import java.util.List;
@@ -74,36 +79,42 @@ public class Jogo {
 
     public void iniciar(){
         Terminal.limpar();
-        Guerreiro guerreiro=new Guerreiro();
-        Mago mago=new Mago();
-        Anão anão=new Anão();
-        Elfo elfo=new Elfo();
+        Personagem[] personagens={
+            new Guerreiro(),
+            new Mago(),
+            new Anão(),
+            new Elfo(),
+            new Ladino(),
+            new Paladino(),
+            new Barbaro(),
+            new Druida(),
+            new Monge()
+        };
 
-        System.out.println("=======================================================");
-        System.out.println("\nEscolha seu personagem:\n\n");
-        System.out.println("1- "+guerreiro.toString());
-        System.out.println("2- "+mago.toString());
-        System.out.println("3- "+anão.toString());
-        System.out.println("4- "+elfo.toString());
+        System.out.println("========== ESCOLHA SEU PERSONAGEM ==========\n");
 
+        String formato="%-3s | %-12s | %5s | %5s | %6s | %7s | %5s | %4s%n";
+        System.out.printf(formato,"N","Classe","Vida","Dano","Defesa","Stamina","Mana","Inv.");
+        System.out.println("-".repeat(68));
+
+        for(int i=0;i<personagens.length;i++){
+            Personagem p=personagens[i];
+            System.out.printf(formato,i+1,p.getClass().getSimpleName(),
+                p.getVida(),p.getDano(),p.getDefesa(),p.getStamina(),
+                p.getMana(),p.getTamanhoInventario());
+        }
+
+        System.out.println("-".repeat(68));
         jogador=null;
-        
+
         while(jogador==null){
+            System.out.print("\nEscolha: ");
             int escolha=Entrada.lerInteiro(scanner);
-            if(escolha==1){
-                jogador=guerreiro;
-            }
-            else if(escolha==2){
-                jogador=mago;
-            }
-            else if(escolha==3){
-                jogador=anão;
-            }
-            else if(escolha==4){
-                jogador=elfo;
+            if(escolha>=1 && escolha<=personagens.length){
+                jogador=personagens[escolha-1];
             }
             else{
-                System.out.println("Selecione um valor válido.");
+                System.out.println("Selecione um valor valido!");
             }
         }
 
@@ -168,7 +179,7 @@ public class Jogo {
 
         Personagem inimigo=new Goblin();
 
-        if(!realizarEncontro(inimigo,40,20)){
+        if(!realizarEncontro(inimigo,40,25)){
             return;
         }
 
@@ -333,7 +344,7 @@ public class Jogo {
 
             System.out.println("1 - Abrir inventario");
             System.out.println("2 - Consultar atributos");
-            System.out.println("3 - Descansar na taverna (5 ouro)");
+            System.out.println("3 - Descansar na taverna (12 ouro)");
             System.out.println("4 - Visitar a loja");
 
             //exploracao e progresso da campanha
@@ -500,7 +511,7 @@ public class Jogo {
                     System.out.println("Um rosnado rompe o silencio da floresta.");
                     System.out.println("Um lobo surge entre as arvores!");
 
-                    if(!realizarEncontro(new Lobo(),50,25)){
+                    if(!realizarEncontro(new Lobo(),50,30)){
                         return;
                     }
                     
@@ -520,13 +531,13 @@ public class Jogo {
 
                     System.out.println("\nDe repente, uma criatura desce das arvores!");
 
-                    if(!realizarEncontro(new Aranha_Gigante(),75,40)){
+                    if(!realizarEncontro(new Aranha_Gigante(),75,50)){
                         return;
                     }
 
                     etapaFloresta=2;
 
-                    receberItem(Item.POCAO_MEDIA);
+                    receberItem(Item.ELIXIR);
 
                     System.out.println("\nVoce encontra a entrada de uma caverna.");
                     System.out.println("Centenas de ovos cobrem suas paredes.");
@@ -546,7 +557,7 @@ public class Jogo {
     }
 
     private void descansarNaVila(){
-        int custo=5;
+        int custo=12;
 
         if(jogador.getVidaAtual()==jogador.getVida()
             && jogador.getStaminaAtual()==jogador.getStamina()
@@ -646,13 +657,13 @@ public class Jogo {
 
                 System.out.println("\nA ARANHA RAINHA DESPERTOU!");
 
-                if(!realizarEncontro(new Aranha_Rainha(),250,150)){
+                if(!realizarEncontro(new Aranha_Rainha(),180,150)){
                     return;
                 }
 
                 etapaFloresta=3;
 
-                receberItem(Item.POCAO_GRANDE);
+                receberItem(Item.POCAO_MEDIA);
                 receberItem(Item.BOLSA_PEQUENA);
 
                 System.out.println("\n========== BOSS DERROTADO ==========");
@@ -768,9 +779,9 @@ public class Jogo {
                     System.out.println("Orc: Voce nao saira daqui vivo!");
 
                     inimigo=new Orc();
-                    xp=100;
-                    ouro=60;
-                    premio=Item.POCAO_MEDIA;
+                    xp=145;
+                    ouro=80;
+                    premio=Item.ELIXIR;
 
                     desfecho="\nCom o Orc derrotado, voce investiga a caravana."
                         +"\nEntre os destrocos, encontra um mapa das montanhas."
@@ -792,9 +803,9 @@ public class Jogo {
                     System.out.println("\nO OGRO AVANCA EM SUA DIRECAO!");
 
                     inimigo=new Ogro();
-                    xp=130;
-                    ouro=80;
-                    premio=Item.POCAO_GRANDE;
+                    xp=160;
+                    ouro=110;
+                    premio=Item.POCAO_MEDIA;
 
                     desfecho="\nA energia sombria abandona o corpo do Ogro."
                         +"\nVoce percebe que aquela criatura estava corrompida."
@@ -823,8 +834,8 @@ public class Jogo {
 
                     inimigo=new Gigante_de_Pedra();
                     xp=250;
-                    ouro=150;
-                    premio=Item.POCAO_SUPREMA;
+                    ouro=180;
+                    premio=Item.POCAO_GRANDE;
 
                     desfecho="\nO Gigante de Pedra finalmente desmorona."
                         +"\nEntre as pedras, voce encontra um pergaminho."
@@ -854,9 +865,9 @@ public class Jogo {
                     System.out.println("\nNecromante: Eldoria se curvara diante de mim!");
 
                     inimigo=new Necromante();
-                    xp=150;
-                    ouro=100;
-                    premio=Item.ESPADA_LENDARIA;
+                    xp=200;
+                    ouro=180;
+                    premio=Item.POCAO_MEDIA;
 
                     desfecho="\nNecromante: Tolo... voce chegou tarde demais..."
                         +"\nNecromante: O ritual ja foi concluido..."

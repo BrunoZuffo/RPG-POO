@@ -10,7 +10,7 @@ public class Lobo extends Personagem{
     private static final int CUSTO_ATAQUE2=25;
 
     public Lobo(){
-        super(35,90,0,20,3,0,1.0,1.4,
+        super(64,90,0,22,5,0,1.0,1.4,
                 CUSTO_ATAQUE1,"Stamina",
                 CUSTO_ATAQUE2,"Stamina",
                 REGEN_VIDA,REGEN_STAMINA,REGEN_MANA);

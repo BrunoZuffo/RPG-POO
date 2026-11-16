@@ -10,7 +10,7 @@ public class Aranha_Rainha extends Personagem{
     private static final int CUSTO_ATAQUE2=35;
 
     public Aranha_Rainha(){
-        super(120,150,100,28,10,0,1.1,1.5,
+        super(155,150,100,34,14,0,1.0,1.5,
                 CUSTO_ATAQUE1,"Stamina",
                 CUSTO_ATAQUE2,"Mana",
                 REGEN_VIDA,REGEN_STAMINA,REGEN_MANA);

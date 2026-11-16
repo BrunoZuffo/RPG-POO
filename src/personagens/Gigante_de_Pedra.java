@@ -10,7 +10,7 @@ public class Gigante_de_Pedra extends Personagem{
     private static final int CUSTO_ATAQUE2=50;
 
     public Gigante_de_Pedra(){
-        super(230,180,0,38,28,0,1.0,1.7,
+        super(270,180,0,44,30,0,1.0,1.5,
                 CUSTO_ATAQUE1,"Stamina",
                 CUSTO_ATAQUE2,"Stamina",
                 REGEN_VIDA,REGEN_STAMINA,REGEN_MANA);

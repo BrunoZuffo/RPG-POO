@@ -4,15 +4,15 @@ public class Anão extends Personagem{
 
     private static final long serialVersionUID=1L;
     
-    private static final int REGEN_VIDA=5;
+    private static final int REGEN_VIDA=3;
     private static final int REGEN_MANA=1;
-    private static final int REGEN_STAMINA=15;
+    private static final int REGEN_STAMINA=9;
     
-    private static final int CUSTO_ATAQUE1=12;
+    private static final int CUSTO_ATAQUE1=13;
     private static final int CUSTO_ATAQUE2=30;
 
     public Anão(){
-        super(150,150,20,10,30,20,1.0,1.5,
+        super(135,140,20,19,22,25,1.0,1.55,
                 CUSTO_ATAQUE1,"Stamina",
                 CUSTO_ATAQUE2,"Stamina",
                 REGEN_VIDA,REGEN_STAMINA,REGEN_MANA);

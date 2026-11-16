@@ -10,7 +10,7 @@ public class Goblin extends Personagem{
     private static final int CUSTO_ATAQUE2=20;
 
     public Goblin(){
-        super(40,60,0,16,5,0,1.0,1.3,
+        super(45,60,0,18,5,0,1.0,1.3,
                 CUSTO_ATAQUE1,"Stamina",
                 CUSTO_ATAQUE2,"Stamina",
                 REGEN_VIDA,REGEN_STAMINA,REGEN_MANA);
