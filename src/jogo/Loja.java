@@ -64,17 +64,34 @@ public class Loja{
             System.out.println("Inventario: "+jogador.getEspacoUsado()
                 +"/"+jogador.getTamanhoInventario());
 
+            String formato="%-3s | %-24s | %5s | %4s | %4s | %6s | %5s%n";
+            //3 caracteres a esquerda, 24 a esquerda, 5 a direita, 4 a direita, 6 a direita, %n quebra de linha
+            System.out.printf(formato,
+                "N",
+                "Item",
+                "Preco",
+                "Dano",
+                "Cura",
+                "Espaco",
+                "Extra");
+
+            System.out.println("-".repeat(69));
+
             for(int i=0;i<catalogo.size();i++){
 
                 Item item=catalogo.get(i);
 
-                System.out.println((i+1)+" - "+item.getNome()
-                    +" | Preco: "+item.getValor()
-                    +" | Dano: "+item.getDano()
-                    +" | Cura: "+item.getCura()
-                    +" | Espaco: "+item.getTamanho()
-                    +" | Armazenamento extra: "+item.getArmazenamentoExtra());
+                System.out.printf(formato,
+                    i+1,
+                    item.getNome(),
+                    item.getValor(),
+                    item.getDano(),
+                    item.getCura(),
+                    item.getTamanho(),
+                    item.getArmazenamentoExtra());
             }
+
+            System.out.println("-".repeat(69));
 
             System.out.println("\n0 - Voltar");
 
@@ -118,13 +135,23 @@ public class Loja{
                 return;
             }
 
+            String formato="%-3s | %-24s | %14s%n";
+
+            System.out.printf(formato,"N","Item","Valor de venda");
+
+            System.out.println("-".repeat(47));
+
             for(int i=0;i<itens.size();i++){
 
                 Item item=itens.get(i);
 
-                System.out.println((i+1)+" - "+item.getNome()
-                    +" | Valor de venda: "+item.getValor()/2);
+                System.out.printf(formato,
+                    i+1,
+                    item.getNome(),
+                    item.getValor()/2);
             }
+
+            System.out.println("-".repeat(47));
 
             System.out.println("\n0 - Voltar");
 

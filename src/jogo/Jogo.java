@@ -246,15 +246,27 @@ public class Jogo {
 
             System.out.println("--------------------------------------------");
 
+            String formato="%-3s | %-24s | %4s | %4s | %6s | %5s%n";
+
+            System.out.printf(formato,
+                "N","Item","Dano","Cura","Espaco","Extra");
+
+            System.out.println("-".repeat(61));
+
             for(int i=0;i<itens.size();i++){
 
                 Item item=itens.get(i);
 
-                System.out.println((i+1)+" - "+item.getNome()
-                    +" | Dano: "+item.getDano()
-                    +" | Cura: "+item.getCura()
-                    +" | Espaco: "+item.getTamanho());
+                System.out.printf(formato,
+                    i+1,
+                    item.getNome(),
+                    item.getDano(),
+                    item.getCura(),
+                    item.getTamanho(),
+                    item.getArmazenamentoExtra());
             }
+
+            System.out.println("-".repeat(61));
 
             System.out.println("\n0 - Voltar");
             System.out.print("\nEscolha um item para utilizar: ");
@@ -288,7 +300,12 @@ public class Jogo {
             System.out.println("\n1 - Abrir inventario");
             System.out.println("2 - Consultar atributos");
             System.out.println("3 - Descansar na taverna (5 ouro)");
-            System.out.println("4 - Explorar a Floresta Sombria");
+            if(etapaFloresta>=2){
+                System.out.println("4 - Floresta Sombria (Concluido)");
+            }
+            else{
+                System.out.println("4 - Explorar a Floresta Sombria");
+            }
             if(etapaFloresta<2){
                 System.out.println("5 - Covil das Aranhas (Bloqueado)");
             }
