@@ -322,47 +322,49 @@ public class Jogo {
 
     private void menuVila(){
         while(jogador.estaVivo() && etapaNorte<5){
-
             Terminal.limpar();
 
             System.out.println("\n============ VILA DE VALENFORD ============");
-
             System.out.println(jogador.getAtributosAtuais());
             System.out.println(jogador.getProgresso());
 
-            System.out.println("\n1 - Abrir inventario");
+            //personagem e servicos da vila
+            System.out.println("\n----------- PERSONAGEM E SERVICOS -----------");
+
+            System.out.println("1 - Abrir inventario");
             System.out.println("2 - Consultar atributos");
             System.out.println("3 - Descansar na taverna (5 ouro)");
+            System.out.println("4 - Visitar a loja");
 
+            //exploracao e progresso da campanha
+            System.out.println("\n---------------- EXPLORACAO ----------------");
             if(etapaFloresta>=2){
-                System.out.println("4 - Floresta Sombria (Concluido)");
+                System.out.println("5 - Floresta Sombria (Concluido)");
             }
             else{
-                System.out.println("4 - Explorar a Floresta Sombria");
+                System.out.println("5 - Explorar a Floresta Sombria");
             }
-
             if(etapaFloresta<2){
-                System.out.println("5 - Covil das Aranhas (Bloqueado)");
+                System.out.println("6 - Covil das Aranhas (Bloqueado)");
             }
             else if(etapaFloresta==2){
-                System.out.println("5 - Explorar o Covil das Aranhas");
+                System.out.println("6 - Explorar o Covil das Aranhas");
             }
             else{
-                System.out.println("5 - Covil das Aranhas (Concluido)");
+                System.out.println("6 - Covil das Aranhas (Concluido)");
             }
-
-            System.out.println("6 - Visitar a loja");
-
             if(etapaFloresta<3){
                 System.out.println("7 - Montanhas (Bloqueado)");
             }
             else{
                 System.out.println("7 - Explorar "+getProximaRegiao());
             }
+
+            //gerenciamento da partida
+            System.out.println("\n------------------ PARTIDA ------------------");
             System.out.println("8 - Salvar jogo");
-
             System.out.println("0 - Voltar ao menu principal (sem salvar)");
-
+            System.out.println("\n=============================================");
             System.out.print("\nEscolha: ");
             int escolha=Entrada.lerInteiro(scanner);
 
@@ -377,13 +379,13 @@ public class Jogo {
                 Terminal.pausar(scanner);
             }
             else if(escolha==4){
-                explorarFloresta();
+                loja.abrir(jogador);
             }
             else if(escolha==5){
-                explorarCovil();
+                explorarFloresta();
             }
             else if(escolha==6){
-                loja.abrir(jogador);
+                explorarCovil();
             }
             else if(escolha==7){
                 explorarNorte();
