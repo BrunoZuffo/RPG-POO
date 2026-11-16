@@ -31,6 +31,7 @@ public class Jogo {
 
     //para se ele voltar para a vila sabermos onde voltar na floresta
     private int etapaFloresta=0;
+    private int etapaNorte=0;
 
     public Jogo(){
         this.scanner = new Scanner(System.in); //criamos um objeto da classe Scanner responsavel por ler a entrada do terminal
@@ -112,6 +113,7 @@ public class Jogo {
 
         //começar a aventura
         etapaFloresta=0;
+        etapaNorte=0;
         Terminal.pausar(scanner);
         aventura();
     }
@@ -289,7 +291,8 @@ public class Jogo {
     }
 
     private void menuVila(){
-        while(jogador.estaVivo()){
+        while(jogador.estaVivo() && etapaNorte<5){
+
             Terminal.limpar();
 
             System.out.println("\n============ VILA DE VALENFORD ============");
@@ -300,12 +303,14 @@ public class Jogo {
             System.out.println("\n1 - Abrir inventario");
             System.out.println("2 - Consultar atributos");
             System.out.println("3 - Descansar na taverna (5 ouro)");
+
             if(etapaFloresta>=2){
                 System.out.println("4 - Floresta Sombria (Concluido)");
             }
             else{
                 System.out.println("4 - Explorar a Floresta Sombria");
             }
+
             if(etapaFloresta<2){
                 System.out.println("5 - Covil das Aranhas (Bloqueado)");
             }
@@ -315,11 +320,19 @@ public class Jogo {
             else{
                 System.out.println("5 - Covil das Aranhas (Concluido)");
             }
+
             System.out.println("6 - Visitar a loja");
+
+            if(etapaFloresta<3){
+                System.out.println("7 - Montanhas (Bloqueado)");
+            }
+            else{
+                System.out.println("7 - Explorar "+getProximaRegiao());
+            }
+
             System.out.println("0 - Sair do jogo");
 
             System.out.print("\nEscolha: ");
-
             int escolha=Entrada.lerInteiro(scanner);
 
             if(escolha==1){
@@ -340,6 +353,9 @@ public class Jogo {
             }
             else if(escolha==6){
                 loja.abrir(jogador);
+            }
+            else if(escolha==7){
+                explorarNorte();
             }
             else if(escolha==0){
                 return;
@@ -624,6 +640,192 @@ public class Jogo {
                 Terminal.pausar(scanner);
             }
         }
+    }
+
+    private String getProximaRegiao(){
+        switch(etapaNorte){
+            case 0:
+                return "Montanhas";
+            case 1:
+                return "Montanhas Profundas";
+            case 2:
+                return "Ruinas de Pedra";
+            case 3:
+                return "Fortaleza Sombria";
+            case 4:
+                return "Pico Ancestral";
+            default:
+                return "Campanha concluida";
+        }
+    }
+
+    private void explorarNorte(){
+        if(etapaFloresta<3){
+            System.out.println("Voce precisa derrotar a Aranha Rainha!");
+            Terminal.pausar(scanner);
+            return;
+        }
+
+        if(etapaNorte>=5){
+            System.out.println("Voce ja concluiu sua jornada!");
+            Terminal.pausar(scanner);
+            return;
+        }
+
+        while(jogador.estaVivo()){
+
+            Terminal.limpar();
+
+            System.out.println("\n========== "+getProximaRegiao()+" ==========");
+
+            System.out.println(jogador.getAtributosAtuais());
+            System.out.println(jogador.getProgresso());
+
+            System.out.println("\n1 - Avancar");
+            System.out.println("2 - Abrir inventario");
+            System.out.println("0 - Retornar para a vila");
+
+            System.out.print("\nEscolha: ");
+            int escolha=Entrada.lerInteiro(scanner);
+
+            if(escolha==0){
+                return;
+            }
+            else if(escolha==2){
+                menuInventario();
+            }
+            else if(escolha==1){
+                break;
+            }
+            else{
+                System.out.println("Escolha invalida!");
+                Terminal.pausar(scanner);
+            }
+        }
+
+        Terminal.limpar();
+
+        Personagem inimigo;
+        int xp;
+        int ouro;
+        Item premio;
+
+        switch(etapaNorte){
+            case 0:
+                System.out.println("Voce chega as montanhas de Eldoria.");
+                System.out.println("Um Orc impede sua passagem.");
+
+                inimigo=new Orc();
+                xp=100;
+                ouro=60;
+                premio=Item.POCAO_MEDIA;
+                break;
+
+            case 1:
+                System.out.println("Voce avanca pelas montanhas.");
+                System.out.println("Um enorme Ogro surge entre as rochas.");
+
+                inimigo=new Ogro();
+                xp=130;
+                ouro=80;
+                premio=Item.POCAO_GRANDE;
+
+                break;
+
+            case 2:
+
+                System.out.println("Voce encontra as antigas ruinas.");
+                System.out.println("Uma estatua comeca a se movimentar.");
+                System.out.println("O Gigante de Pedra desperta!");
+
+                inimigo=new Gigante_de_Pedra();
+                xp=250;
+                ouro=150;
+                premio=Item.POCAO_SUPREMA;
+
+                break;
+
+            case 3:
+
+                System.out.println("Voce chega a Fortaleza Sombria.");
+                System.out.println("Um Necromante controla a magia das sombras.");
+                System.out.println("Ele deseja despertar uma antiga criatura.");
+
+                inimigo=new Necromante();
+                xp=150;
+                ouro=100;
+                premio=Item.ESPADA_LENDARIA;
+
+                break;
+
+            case 4:
+
+                System.out.println("Voce finalmente alcanca o Pico Ancestral.");
+                System.out.println("O ceu escurece e as montanhas tremem.");
+                System.out.println("O Dragao Ancestral despertou!");
+
+                inimigo=new Dragão_Ancestral();
+                xp=500;
+                ouro=300;
+                premio=null;
+
+                break;
+
+            default:
+                return;
+        }
+
+        //reutilizamos o mesmo metodo para todos os combates
+        if(!realizarEncontro(inimigo,xp,ouro)){
+            return;
+        }
+
+        etapaNorte++;
+
+        //nem todos os inimigos possuem um item como recompensa
+        if(premio!=null){
+            receberItem(premio);
+        }
+
+        if(etapaNorte==5){
+            finalizarCampanha();
+            return;
+        }
+
+        System.out.println("\nVoce concluiu mais uma etapa da jornada!");
+        System.out.println("Proximo destino: "+getProximaRegiao());
+        System.out.println("Voce retorna para Valenford para se preparar.");
+
+        Terminal.pausar(scanner);
+    }
+
+    private void finalizarCampanha(){
+        Terminal.pausar(scanner);
+        Terminal.limpar();
+
+        System.out.println("\n==========================================");
+        System.out.println("             ELDORIA ESTA SALVA!");
+        System.out.println("==========================================");
+
+        System.out.println("\nCom a derrota do Dragao Ancestral,");
+        System.out.println("a magia sombria finalmente desaparece.");
+
+        System.out.println("As criaturas retornam aos seus habitats.");
+        System.out.println("A paz volta ao reino de Eldoria.");
+
+        System.out.println("\nSeu nome sera lembrado por geracoes,");
+        System.out.println(jogador.getNome()+", heroi de Eldoria!");
+
+        System.out.println("\n========== ESTATISTICAS FINAIS ==========");
+
+        System.out.println(jogador.toString());
+        System.out.println(jogador.getAtributosAtuais());
+        System.out.println(jogador.getProgresso());
+
+        System.out.println("\nObrigado por jogar!");
+        System.out.println("FIM");
+
+        Terminal.pausar(scanner);
     }
 
 }
