@@ -103,7 +103,7 @@ public class Jogo {
         while(nome==null || nome.isBlank()){
             nome=scanner.nextLine();
         }
-
+        Terminal.limpar();
         jogador.setNome(nome);
         System.out.println("\nPersonagem criado com sucesso!\n"+jogador.getNome()+"- "+jogador.toString());
 
