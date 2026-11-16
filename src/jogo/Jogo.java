@@ -27,6 +27,7 @@ public class Jogo {
     private Scanner scanner;
     private Personagem jogador;
     private Combate combate;
+    private Loja loja;
 
     //para se ele voltar para a vila sabermos onde voltar na floresta
     private int etapaFloresta=0;
@@ -35,6 +36,7 @@ public class Jogo {
         this.scanner = new Scanner(System.in); //criamos um objeto da classe Scanner responsavel por ler a entrada do terminal
         this.jogador = null; //fazendo isso podemos acessar jogador a qualquer momento, antes iniciavamos ele só no iniciar()
         this.combate = new Combate(scanner); //passando o scanner que ja existe em Jogo para o combate para evitar inicializar mais um
+        this.loja=new Loja(scanner); //passando o scanner que ja existe, igual a ideia do this.combate
     }
 
     public void menu(){
@@ -292,6 +294,7 @@ public class Jogo {
             else{
                 System.out.println("5 - Covil das Aranhas (Concluido)");
             }
+            System.out.println("6 - Visitar a loja");
             System.out.println("0 - Sair do jogo");
 
             System.out.print("\nEscolha: ");
@@ -312,6 +315,9 @@ public class Jogo {
             }
             else if(escolha==5){
                 explorarCovil();
+            }
+            else if(escolha==6){
+                loja.abrir(jogador);
             }
             else if(escolha==0){
                 return;

@@ -73,10 +73,26 @@ public class Inventario{
             throw new InventarioException("Este item nao e consumivel!");
         }
 
-        itens.remove(indice);
+        removerItem(indice);
     }
 
     public List<Item> getItens(){
         return List.copyOf(itens);
     }
+
+    public void removerItem(int indice){
+        Item item=getItem(indice);
+
+        int espacoRestante=getEspacoUsado()-item.getTamanho();
+        int capacidadeRestante=getCapacidade()-item.getArmazenamentoExtra();
+
+        if(espacoRestante>capacidadeRestante){
+            throw new InventarioException("Espaco insuficiente para remover este item!");
+        }
+
+        itens.remove(indice);
+    }
+
+    
+
 }

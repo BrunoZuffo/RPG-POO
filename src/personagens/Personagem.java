@@ -370,4 +370,42 @@ public abstract class Personagem{ //abstract para podermos fazer abstract ataque
         staminaAtual=stamina;
     }
 
+    public String comprarItem(Item item){
+
+        if(item==null || item==Item.MAO){
+            throw new InventarioException("Item invalido para compra!");
+        }
+
+        int preco=item.getValor();
+
+        if(getOuro()<preco){
+            throw new RecursoInsuficienteException("Ouro insuficiente!");
+        }
+
+        inventario.adicionarItem(item);
+        gastarOuro(preco);
+
+        return "Voce comprou: "+item.getNome()
+            +" por "+preco+" ouro!";
+    }
+
+    public String venderItem(int indice){
+
+        Item item=inventario.getItem(indice);
+
+        int valorVenda=item.getValor()/2;
+
+        inventario.removerItem(indice);
+
+        //desequipando a arma caso nao exista outra igual
+        if(item_usando==item && !inventario.getItens().contains(item)){
+            item_usando=Item.MAO;
+        }
+
+        ganharOuro(valorVenda);
+
+        return "Voce vendeu: "+item.getNome()
+            +" por "+valorVenda+" ouro!";
+    }
+
 }
