@@ -21,7 +21,7 @@ public class Terminal{
     public static void pausar(Scanner scanner){
         System.out.println("\nPressione ENTER para continuar...");
 
-        while(!scanner.nextLine().isEmpty()){
+        while(!scanner.nextLine().isEmpty()){//quando clicamos enter enviamos "", entao isEmpty retorna true e o ! faz ser 0-> sai do loop
             System.out.println("Pressione apenas ENTER!");
         }
     }
