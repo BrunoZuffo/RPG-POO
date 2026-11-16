@@ -40,6 +40,7 @@ public class Jogo {
     }
 
     public void menu(){
+        Terminal.limpar();
         System.out.println("========================= RPG =========================\n\n");
         System.out.println("1 - Continuar jogo\n");
         System.out.println("2 - Comecar novo jogo\n");
@@ -63,6 +64,7 @@ public class Jogo {
     }
 
     public void iniciar(){
+        Terminal.limpar();
         Guerreiro guerreiro=new Guerreiro();
         Mago mago=new Mago();
         Anão anão=new Anão();
@@ -96,7 +98,6 @@ public class Jogo {
             }
         }
 
-        scanner.nextLine(); // limpa o Enter que ficou do nextInt() do lerInteiro()
         String nome=null;
         System.out.println("\nEscolha o nome do seu personagem: ");
         while(nome==null || nome.isBlank()){
@@ -229,6 +230,7 @@ public class Jogo {
 
     private void menuInventario(){
         while(true){
+            Terminal.limpar();
 
             System.out.println("\n================ INVENTARIO ================");
 
@@ -270,11 +272,14 @@ public class Jogo {
             catch(InventarioException erro){
                 System.out.println(erro.getMessage());
             }
+
+            Terminal.pausar(scanner);
         }
     }
 
     private void menuVila(){
         while(jogador.estaVivo()){
+            Terminal.limpar();
 
             System.out.println("\n============ VILA DE VALENFORD ============");
 
@@ -309,6 +314,7 @@ public class Jogo {
             }
             else if(escolha==3){
                 descansarNaVila();
+                Terminal.pausar(scanner);
             }
             else if(escolha==4){
                 explorarFloresta();
@@ -388,6 +394,7 @@ public class Jogo {
         System.out.println("cercada por arvores antigas e uma nevoa intensa.");
 
         while(jogador.estaVivo()){
+            Terminal.limpar();
 
             System.out.println("\n=========== FLORESTA SOMBRIA ===========");
 
@@ -489,6 +496,7 @@ public class Jogo {
     }
 
     private void consultarAtributos(){
+        Terminal.limpar();
         System.out.println("\n============ FICHA DO PERSONAGEM ============");
 
         System.out.println("Nome: "+jogador.getNome());
@@ -506,12 +514,7 @@ public class Jogo {
         System.out.println("\nRegeneracao por rodada:");
         System.out.println(jogador.getRegeneracao());
 
-        System.out.println("\nPressione ENTER para voltar...");
-        scanner.nextLine();
-
-        while(!scanner.nextLine().isEmpty()){
-            System.out.println("Pressione apenas ENTER!");
-        }
+        Terminal.pausar(scanner);
     }
 
     private void explorarCovil(){
@@ -534,6 +537,7 @@ public class Jogo {
         System.out.println("Anciao: Prepare-se antes de partir!");
 
         while(jogador.estaVivo()){
+            Terminal.limpar();
 
             System.out.println("\n============ COVIL DAS ARANHAS ============");
 

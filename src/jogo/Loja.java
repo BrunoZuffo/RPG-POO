@@ -15,7 +15,7 @@ public class Loja{
 
     public Loja(Scanner scanner){
         this.scanner=scanner;
-        
+
         //loop para automatizar os itens da loja mesmo que adicionemos no futuro
         for(Item item: Item.values()){
             if(item!=Item.MAO){
@@ -27,7 +27,7 @@ public class Loja{
     public void abrir(Personagem jogador){
 
         while(true){
-
+            Terminal.pausar(scanner);
             System.out.println("\n========== LOJA DE VALENFORD ==========");
             System.out.println("Ouro: "+jogador.getOuro());
 
@@ -56,7 +56,7 @@ public class Loja{
     private void comprar(Personagem jogador){
 
         while(true){
-
+            Terminal.pausar(scanner);
             System.out.println("\n========== COMPRAR ITENS ==========");
             System.out.println("Ouro: "+jogador.getOuro());
 
@@ -97,13 +97,14 @@ public class Loja{
             catch(InventarioException | RecursoInsuficienteException erro){
                 System.out.println(erro.getMessage());
             }
+            Terminal.pausar(scanner);
         }
     }
 
     private void vender(Personagem jogador){
 
         while(true){
-
+            Terminal.pausar(scanner);
             System.out.println("\n========== VENDER ITENS ==========");
             System.out.println("Ouro: "+jogador.getOuro());
 
@@ -137,6 +138,7 @@ public class Loja{
             catch(InventarioException erro){
                 System.out.println(erro.getMessage());
             }
+            Terminal.pausar(scanner);
         }
     }
 }

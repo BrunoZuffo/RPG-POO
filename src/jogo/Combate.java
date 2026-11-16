@@ -24,6 +24,8 @@ public class Combate{
 
         while(jogador.estaVivo() && inimigo.estaVivo()){
 
+            Terminal.pausar(scanner);
+
             System.out.println("\n================ RPG | RODADA "+rodada+" ================\n");
 
             String formato="%-30s | %-30s%n"; //estamos definindo um formato de string para usarmos quando formos printar
@@ -109,6 +111,7 @@ public class Combate{
             }
             catch(RecursoInsuficienteException | InventarioException erro){
                 System.out.println(erro.getMessage());
+                Terminal.pausar(scanner);
                 continue;
             }
 
@@ -142,7 +145,7 @@ public class Combate{
             inimigo.regenerarAtributos();
 
             System.out.println("Atributos regenerados.");
-
+            Terminal.pausar(scanner);
             rodada++;
         }
 
