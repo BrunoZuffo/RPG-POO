@@ -672,7 +672,7 @@ public class Jogo {
             return;
         }
 
-        while(jogador.estaVivo()){
+        while(jogador.estaVivo() && etapaNorte<5){
 
             Terminal.limpar();
 
@@ -681,7 +681,7 @@ public class Jogo {
             System.out.println(jogador.getAtributosAtuais());
             System.out.println(jogador.getProgresso());
 
-            System.out.println("\n1 - Avancar");
+            System.out.println("\n1 - Continuar explorando");
             System.out.println("2 - Abrir inventario");
             System.out.println("0 - Retornar para a vila");
 
@@ -693,112 +693,204 @@ public class Jogo {
             }
             else if(escolha==2){
                 menuInventario();
+                continue;
             }
-            else if(escolha==1){
-                break;
-            }
-            else{
+            else if(escolha!=1){
                 System.out.println("Escolha invalida!");
                 Terminal.pausar(scanner);
+                continue;
             }
-        }
 
-        Terminal.limpar();
+            Terminal.limpar();
 
-        Personagem inimigo;
-        int xp;
-        int ouro;
-        Item premio;
+            Personagem inimigo;
+            int xp;
+            int ouro;
+            Item premio;
+            String desfecho;
 
-        switch(etapaNorte){
-            case 0:
-                System.out.println("Voce chega as montanhas de Eldoria.");
-                System.out.println("Um Orc impede sua passagem.");
+            switch(etapaNorte){
 
-                inimigo=new Orc();
-                xp=100;
-                ouro=60;
-                premio=Item.POCAO_MEDIA;
-                break;
+                case 0:
 
-            case 1:
-                System.out.println("Voce avanca pelas montanhas.");
-                System.out.println("Um enorme Ogro surge entre as rochas.");
+                    System.out.println("============== CAPITULO 4 ==============");
+                    System.out.println("          MONTANHAS DE ELDORIA");
+                    System.out.println("========================================");
 
-                inimigo=new Ogro();
-                xp=130;
-                ouro=80;
-                premio=Item.POCAO_GRANDE;
+                    System.out.println("\nApos horas de caminhada, voce chega as montanhas.");
+                    System.out.println("O frio aumenta conforme voce avanca.");
 
-                break;
+                    System.out.println("\nUma caravana destruida bloqueia a estrada.");
+                    System.out.println("Entre os destrocos, voce encontra cristais escuros.");
 
-            case 2:
+                    System.out.println("\nOs cristais possuem o mesmo simbolo");
+                    System.out.println("encontrado no Covil das Aranhas.");
 
-                System.out.println("Voce encontra as antigas ruinas.");
-                System.out.println("Uma estatua comeca a se movimentar.");
-                System.out.println("O Gigante de Pedra desperta!");
+                    System.out.println("\nUma voz interrompe sua investigacao.");
 
-                inimigo=new Gigante_de_Pedra();
-                xp=250;
-                ouro=150;
-                premio=Item.POCAO_SUPREMA;
+                    System.out.println("Orc: Ninguem deve descobrir o que transportamos!");
+                    System.out.println("Orc: Voce nao saira daqui vivo!");
 
-                break;
+                    inimigo=new Orc();
+                    xp=100;
+                    ouro=60;
+                    premio=Item.POCAO_MEDIA;
 
-            case 3:
+                    desfecho="\nCom o Orc derrotado, voce investiga a caravana."
+                        +"\nEntre os destrocos, encontra um mapa das montanhas."
+                        +"\nUma antiga ruina esta marcada no documento."
+                        +"\nVoce decide seguir naquela direcao.";
 
-                System.out.println("Voce chega a Fortaleza Sombria.");
-                System.out.println("Um Necromante controla a magia das sombras.");
-                System.out.println("Ele deseja despertar uma antiga criatura.");
+                    break;
 
-                inimigo=new Necromante();
-                xp=150;
-                ouro=100;
-                premio=Item.ESPADA_LENDARIA;
+                case 1:
 
-                break;
+                    System.out.println("Voce segue o caminho indicado pelo mapa.");
+                    System.out.println("A vegetacao desaparece e o silencio domina.");
 
-            case 4:
+                    System.out.println("\nCristais escuros estao espalhados pelo caminho.");
 
-                System.out.println("Voce finalmente alcanca o Pico Ancestral.");
-                System.out.println("O ceu escurece e as montanhas tremem.");
-                System.out.println("O Dragao Ancestral despertou!");
+                    System.out.println("Uma enorme criatura bloqueia uma passagem.");
+                    System.out.println("Seus olhos brilham com uma energia sombria.");
 
-                inimigo=new Dragão_Ancestral();
-                xp=500;
-                ouro=300;
-                premio=null;
+                    System.out.println("\nO OGRO AVANCA EM SUA DIRECAO!");
 
-                break;
+                    inimigo=new Ogro();
+                    xp=130;
+                    ouro=80;
+                    premio=Item.POCAO_GRANDE;
 
-            default:
+                    desfecho="\nA energia sombria abandona o corpo do Ogro."
+                        +"\nVoce percebe que aquela criatura estava corrompida."
+                        +"\nA passagem finalmente esta livre."
+                        +"\nAo longe, surgem as antigas ruinas de Eldoria.";
+
+                    break;
+
+                case 2:
+
+                    System.out.println("============== CAPITULO 5 ==============");
+                    System.out.println("             RUINAS DE PEDRA");
+                    System.out.println("========================================");
+
+                    System.out.println("\nVoce entra em um templo abandonado.");
+                    System.out.println("Inscricoes antigas cobrem suas paredes.");
+
+                    System.out.println("\nAs inscricoes contam a historia de um dragao.");
+                    System.out.println("Durante seculos, um selo magico manteve");
+                    System.out.println("a criatura adormecida nas montanhas.");
+
+                    System.out.println("\nNo centro do templo, voce encontra o selo destruido.");
+                    System.out.println("Uma enorme estatua comeca a se movimentar.");
+
+                    System.out.println("\nO antigo guardiao do templo foi corrompido!");
+
+                    inimigo=new Gigante_de_Pedra();
+                    xp=250;
+                    ouro=150;
+                    premio=Item.POCAO_SUPREMA;
+
+                    desfecho="\nO Gigante de Pedra finalmente desmorona."
+                        +"\nEntre as pedras, voce encontra um pergaminho."
+                        +"\nEle descreve um ritual proibido de necromancia."
+                        +"\nO responsavel se esconde na Fortaleza Sombria."
+                        +"\nVoce precisa impedi-lo antes que seja tarde.";
+
+                    break;
+
+                case 3:
+
+                    System.out.println("============== CAPITULO 6 ==============");
+                    System.out.println("             FORTALEZA SOMBRIA");
+                    System.out.println("========================================");
+
+                    System.out.println("\nVoce atravessa os portoes da fortaleza.");
+                    System.out.println("Uma estranha energia toma conta do lugar.");
+
+                    System.out.println("\nNo centro de um enorme salao,");
+                    System.out.println("um homem realiza um ritual proibido.");
+
+                    System.out.println("\nNecromante: Entao voce chegou ate aqui...");
+                    System.out.println("Necromante: Durante anos preparei este momento.");
+                    System.out.println("Necromante: As criaturas, os cristais e o selo...");
+                    System.out.println("Necromante: Tudo fazia parte do meu plano!");
+
+                    System.out.println("\nNecromante: Eldoria se curvara diante de mim!");
+
+                    inimigo=new Necromante();
+                    xp=150;
+                    ouro=100;
+                    premio=Item.ESPADA_LENDARIA;
+
+                    desfecho="\nNecromante: Tolo... voce chegou tarde demais..."
+                        +"\nNecromante: O ritual ja foi concluido..."
+                        +"\n\nA fortaleza inteira comeca a tremer."
+                        +"\nUm rugido ecoa por todas as montanhas."
+                        +"\nO Dragao Ancestral finalmente despertou."
+                        +"\nResta apenas uma chance de salvar Eldoria.";
+
+                    break;
+
+                case 4:
+
+                    System.out.println("============== CAPITULO 7 ==============");
+                    System.out.println("              PICO ANCESTRAL");
+                    System.out.println("========================================");
+
+                    System.out.println("\nVoce inicia a ultima subida da sua jornada.");
+                    System.out.println("Raios iluminam o ceu sobre as montanhas.");
+
+                    System.out.println("\nDo alto do pico, voce observa Eldoria.");
+                    System.out.println("Valenford pode ser vista ao longe.");
+
+                    System.out.println("\nVoce se lembra de todos aqueles que ajudou.");
+                    System.out.println("O destino do reino agora esta em suas maos.");
+
+                    System.out.println("\nUma enorme sombra cobre o ceu.");
+                    System.out.println("O calor das chamas toma conta do lugar.");
+
+                    System.out.println("\nO DRAGAO ANCESTRAL DESPERTOU!");
+                    System.out.println("A BATALHA FINAL VAI COMECAR!");
+
+                    inimigo=new Dragão_Ancestral();
+                    xp=500;
+                    ouro=300;
+                    premio=null;
+
+                    desfecho="\nO Dragao solta seu ultimo rugido."
+                        +"\nOs cristais sombrios perdem seu brilho."
+                        +"\nAs nuvens comecam a desaparecer.";
+
+                    break;
+
+                default:
+                    return;
+            }
+
+            //realizamos o combate sem sair do while de exploracao
+            if(!realizarEncontro(inimigo,xp,ouro)){
                 return;
+            }
+
+            etapaNorte++;
+
+            if(premio!=null){
+                receberItem(premio);
+            }
+
+            //exibindo a continuacao da historia depois da vitoria
+            System.out.println(desfecho);
+
+            if(etapaNorte==5){
+                finalizarCampanha();
+                return;
+            }
+
+            System.out.println("\nProximo destino: "+getProximaRegiao());
+
+            Terminal.pausar(scanner);
         }
-
-        //reutilizamos o mesmo metodo para todos os combates
-        if(!realizarEncontro(inimigo,xp,ouro)){
-            return;
-        }
-
-        etapaNorte++;
-
-        //nem todos os inimigos possuem um item como recompensa
-        if(premio!=null){
-            receberItem(premio);
-        }
-
-        if(etapaNorte==5){
-            finalizarCampanha();
-            return;
-        }
-
-        System.out.println("\nVoce concluiu mais uma etapa da jornada!");
-        System.out.println("Proximo destino: "+getProximaRegiao());
-        System.out.println("Voce retorna para Valenford para se preparar.");
-
-        Terminal.pausar(scanner);
     }
-
     private void finalizarCampanha(){
         Terminal.pausar(scanner);
         Terminal.limpar();
