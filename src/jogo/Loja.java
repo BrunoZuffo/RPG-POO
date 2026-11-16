@@ -6,31 +6,22 @@ import inventario.Item;
 import personagens.Personagem;
 import excecoes.InventarioException;
 import excecoes.RecursoInsuficienteException;
+import java.util.ArrayList;
 
 public class Loja{
 
     private Scanner scanner;
-
-    private final List<Item> catalogo=List.of(
-        Item.ESPADA_CURTA,
-        Item.ESPADA_LONGA,
-        Item.MACHADO,
-        Item.MARTELO_DE_GUERRA,
-        Item.CAJADO_SIMPLES,
-        Item.CAJADO_MAGICO,
-        Item.CAJADO_ANCESTRAL,
-        Item.ARCO,
-        Item.POCAO_PEQUENA,
-        Item.POCAO_MEDIA,
-        Item.POCAO_GRANDE,
-        Item.ERVA_MEDICINAL,
-        Item.BOLSA_PEQUENA,
-        Item.BOLSA_MEDIA,
-        Item.BOLSA_GRANDE
-    );
+    private final List<Item> catalogo=new ArrayList<>();
 
     public Loja(Scanner scanner){
         this.scanner=scanner;
+        
+        //loop para automatizar os itens da loja mesmo que adicionemos no futuro
+        for(Item item: Item.values()){
+            if(item!=Item.MAO){
+                catalogo.add(item);
+            }
+        }
     }
 
     public void abrir(Personagem jogador){
