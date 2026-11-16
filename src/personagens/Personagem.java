@@ -23,6 +23,7 @@ public abstract class Personagem implements Serializable{ //abstract para poderm
     private int mana;
     private int manaAtual;
     private Item item_usando;
+    private Item armadura_usando;
     private Inventario inventario;
     private double multiplicadorAtaque1;
     private double multiplicadorAtaque2;
@@ -58,6 +59,7 @@ public abstract class Personagem implements Serializable{ //abstract para poderm
         this.dano=dano;
         this.defesa=defesa;
         this.item_usando=Item.MAO;
+        this.armadura_usando=Item.SEM_ARMADURA;
         this.inventario=new Inventario(inventario_tamanho);
         this.multiplicadorAtaque1=multiplicadorAtaque1;
         this.multiplicadorAtaque2=multiplicadorAtaque2;
@@ -85,6 +87,19 @@ public abstract class Personagem implements Serializable{ //abstract para poderm
     public int getDefesa(){
         return this.defesa;
     } 
+
+    //saves antigos podem ter armadura_usando nulo
+    public Item getArmaduraAtual(){
+        if(armadura_usando==null){
+            return Item.SEM_ARMADURA;
+        }
+        return this.armadura_usando;
+    }
+
+    //o bonus nao altera a defesa base e nao aumenta com o nivel
+    public int getDefesaTotal(){
+        return getDefesa()+getArmaduraAtual().getDefesa();
+    }
 
     public int getVidaAtual(){
         return this.vida_atual;
@@ -208,7 +223,7 @@ public abstract class Personagem implements Serializable{ //abstract para poderm
     }
 
     private int calcularDano(Personagem alvo,double multiplicador){
-        int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*multiplicador-alvo.getDefesa());
+        int dano_causado=(int)Math.round((this.getItemAtual().getDano()+this.getDano())*multiplicador-alvo.getDefesaTotal());
 
         if(dano_causado<1){
             dano_causado=1;
@@ -256,6 +271,11 @@ public abstract class Personagem implements Serializable{ //abstract para poderm
 
         if(item.getCura()>0){
             return usarConsumivel(indice);
+        }
+
+        if(item.getDefesa()>0){
+            this.armadura_usando=item;
+            return "Voce equipou: "+item.getNome();
         }
 
         if(item.getDano()>0){
@@ -377,7 +397,7 @@ public abstract class Personagem implements Serializable{ //abstract para poderm
 
     public String comprarItem(Item item){
 
-        if(item==null || item==Item.MAO){
+        if(item==null || item==Item.MAO || item==Item.SEM_ARMADURA){
             throw new InventarioException("Item invalido para compra!");
         }
 
@@ -405,6 +425,11 @@ public abstract class Personagem implements Serializable{ //abstract para poderm
         //desequipando a arma caso nao exista outra igual
         if(item_usando==item && !inventario.getItens().contains(item)){
             item_usando=Item.MAO;
+        }
+
+        //desequipando a armadura caso nao exista outra igual
+        if(getArmaduraAtual()==item && !inventario.getItens().contains(item)){
+            armadura_usando=Item.SEM_ARMADURA;
         }
 
         ganharOuro(valorVenda);

@@ -10,7 +10,7 @@ public class Orc extends Personagem{
     private static final int CUSTO_ATAQUE2=30;
 
     public Orc(){
-        super(155,100,0,35,17,0,1.0,1.5,
+        super(155,100,0,37,17,0,1.0,1.5,
                 CUSTO_ATAQUE1,"Stamina",
                 CUSTO_ATAQUE2,"Stamina",
                 REGEN_VIDA,REGEN_STAMINA,REGEN_MANA);

@@ -18,7 +18,7 @@ public class Loja{
 
         //loop para automatizar os itens da loja mesmo que adicionemos no futuro
         for(Item item: Item.values()){
-            if(item!=Item.MAO){
+            if(item!=Item.MAO && item!=Item.SEM_ARMADURA){
                 catalogo.add(item);
             }
         }
@@ -64,18 +64,19 @@ public class Loja{
             System.out.println("Inventario: "+jogador.getEspacoUsado()
                 +"/"+jogador.getTamanhoInventario());
 
-            String formato="%-3s | %-24s | %5s | %4s | %4s | %6s | %5s%n";
+            String formato="%-3s | %-24s | %5s | %4s | %6s | %4s | %6s | %5s%n";
             //3 caracteres a esquerda, 24 a esquerda, 5 a direita, 4 a direita, 6 a direita, %n quebra de linha
             System.out.printf(formato,
                 "N",
                 "Item",
                 "Preco",
                 "Dano",
+                "Defesa",
                 "Cura",
                 "Espaco",
                 "Extra");
 
-            System.out.println("-".repeat(69));
+            System.out.println("-".repeat(78));
 
             for(int i=0;i<catalogo.size();i++){
 
@@ -86,12 +87,13 @@ public class Loja{
                     item.getNome(),
                     item.getValor(),
                     item.getDano(),
+                    item.getDefesa(),
                     item.getCura(),
                     item.getTamanho(),
                     item.getArmazenamentoExtra());
             }
 
-            System.out.println("-".repeat(69));
+            System.out.println("-".repeat(78));
 
             System.out.println("\n0 - Voltar");
 

@@ -55,8 +55,8 @@ public class Combate{
                 "Dano base: "+inimigo.getDano());
 
             System.out.printf(formato,
-                "Defesa: "+jogador.getDefesa(),
-                "Defesa: "+inimigo.getDefesa());
+                "Defesa: "+jogador.getDefesaTotal(),
+                "Defesa: "+inimigo.getDefesaTotal());
 
             //exibindo as acoes disponiveis
             System.out.println("\n================ ACOES DISPONIVEIS ================\n");
@@ -165,7 +165,7 @@ public class Combate{
 
         System.out.println("\nAtributos atuais de "+jogador.getNome()+":");
         System.out.println(jogador.getAtributosAtuais());
-        System.out.println("Dano base: "+jogador.getDano()+" | Defesa: "+jogador.getDefesa());
+        System.out.println("Dano base: "+jogador.getDano()+" | Defesa: "+jogador.getDefesaTotal());
 
         System.out.println("=============================================");
 

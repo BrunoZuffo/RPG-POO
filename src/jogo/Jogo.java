@@ -277,6 +277,8 @@ public class Jogo {
             System.out.println("\n================ INVENTARIO ================");
 
             System.out.println("Arma equipada: "+jogador.getItemAtual().getNome());
+            System.out.println("Armadura equipada: "+jogador.getArmaduraAtual().getNome());
+            System.out.println("Defesa total: "+jogador.getDefesaTotal());
 
             System.out.println("Espaco utilizado: "+jogador.getEspacoUsado()
                 +"/"+jogador.getTamanhoInventario());
@@ -289,12 +291,12 @@ public class Jogo {
 
             System.out.println("--------------------------------------------");
 
-            String formato="%-3s | %-24s | %4s | %4s | %6s | %5s%n";
+            String formato="%-3s | %-24s | %4s | %6s | %4s | %6s | %5s%n";
 
             System.out.printf(formato,
-                "N","Item","Dano","Cura","Espaco","Extra");
+                "N","Item","Dano","Defesa","Cura","Espaco","Extra");
 
-            System.out.println("-".repeat(61));
+            System.out.println("-".repeat(70));
 
             for(int i=0;i<itens.size();i++){
 
@@ -304,12 +306,13 @@ public class Jogo {
                     i+1,
                     item.getNome(),
                     item.getDano(),
+                    item.getDefesa(),
                     item.getCura(),
                     item.getTamanho(),
                     item.getArmazenamentoExtra());
             }
 
-            System.out.println("-".repeat(61));
+            System.out.println("-".repeat(70));
 
             System.out.println("\n0 - Voltar");
             System.out.print("\nEscolha um item para utilizar: ");
@@ -594,7 +597,10 @@ public class Jogo {
         System.out.println("Dano total: "
             +(jogador.getDano()+jogador.getItemAtual().getDano()));
 
-        System.out.println("Defesa: "+jogador.getDefesa());
+        System.out.println("Armadura equipada: "+jogador.getArmaduraAtual().getNome());
+        System.out.println("Defesa base: "+jogador.getDefesa());
+        System.out.println("Bonus da armadura: "+jogador.getArmaduraAtual().getDefesa());
+        System.out.println("Defesa total: "+jogador.getDefesaTotal());
 
         System.out.println("\nRegeneracao por rodada:");
         System.out.println(jogador.getRegeneracao());
@@ -834,7 +840,7 @@ public class Jogo {
 
                     inimigo=new Gigante_de_Pedra();
                     xp=250;
-                    ouro=180;
+                    ouro=230;
                     premio=Item.POCAO_GRANDE;
 
                     desfecho="\nO Gigante de Pedra finalmente desmorona."
@@ -866,7 +872,7 @@ public class Jogo {
 
                     inimigo=new Necromante();
                     xp=200;
-                    ouro=180;
+                    ouro=300;
                     premio=Item.POCAO_MEDIA;
 
                     desfecho="\nNecromante: Tolo... voce chegou tarde demais..."
