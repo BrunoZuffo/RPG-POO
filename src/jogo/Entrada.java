@@ -7,7 +7,7 @@ public class Entrada{
     public static int lerInteiro(Scanner scanner){
 
         while(true){
-            try{    //parseInt converte inteiro numa string
+            try{    //parseInt converte string num int
                 return Integer.parseInt(scanner.nextLine().trim()); //trim() remove todos os espaços em branco do começo e final de uma string
             }
             catch(NumberFormatException erro){

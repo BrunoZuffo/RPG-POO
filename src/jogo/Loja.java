@@ -27,7 +27,7 @@ public class Loja{
     public void abrir(Personagem jogador){
 
         while(true){
-            Terminal.pausar(scanner);
+            Terminal.limpar();
             System.out.println("\n========== LOJA DE VALENFORD ==========");
             System.out.println("Ouro: "+jogador.getOuro());
 
@@ -49,6 +49,7 @@ public class Loja{
             }
             else{
                 System.out.println("Escolha invalida!");
+                Terminal.pausar(scanner);
             }
         }
     }
@@ -56,7 +57,7 @@ public class Loja{
     private void comprar(Personagem jogador){
 
         while(true){
-            Terminal.pausar(scanner);
+            Terminal.limpar();
             System.out.println("\n========== COMPRAR ITENS ==========");
             System.out.println("Ouro: "+jogador.getOuro());
 
@@ -86,6 +87,7 @@ public class Loja{
 
             if(escolha<1 || escolha>catalogo.size()){
                 System.out.println("Escolha invalida!");
+                Terminal.pausar(scanner);
                 continue;
             }
 
@@ -104,7 +106,7 @@ public class Loja{
     private void vender(Personagem jogador){
 
         while(true){
-            Terminal.pausar(scanner);
+            Terminal.limpar();
             System.out.println("\n========== VENDER ITENS ==========");
             System.out.println("Ouro: "+jogador.getOuro());
 
@@ -112,6 +114,7 @@ public class Loja{
 
             if(itens.isEmpty()){
                 System.out.println("Voce nao possui itens para vender!");
+                Terminal.pausar(scanner);
                 return;
             }
 

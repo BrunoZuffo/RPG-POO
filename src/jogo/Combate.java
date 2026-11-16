@@ -20,11 +20,13 @@ public class Combate{
         System.out.println("\nUm inimigo apareceu!");
         System.out.println("Voce encontrou: "+inimigo.getNome());
 
+        Terminal.pausar(scanner);
+
         int rodada=1;
 
         while(jogador.estaVivo() && inimigo.estaVivo()){
 
-            Terminal.pausar(scanner);
+            Terminal.limpar();
 
             System.out.println("\n================ RPG | RODADA "+rodada+" ================\n");
 
@@ -106,6 +108,7 @@ public class Combate{
                 }
                 else{
                     System.out.println("Escolha invalida!");
+                    Terminal.pausar(scanner);
                     continue;
                 }
             }
@@ -194,6 +197,9 @@ public class Combate{
     }
 
     private boolean escolherConsumivel(Personagem jogador){
+
+        Terminal.limpar();
+        
         List<Item> itens=jogador.getInventario();
 
         boolean possuiConsumivel=false;
@@ -215,6 +221,7 @@ public class Combate{
 
         if(!possuiConsumivel){
             System.out.println("Voce nao possui consumiveis!");
+            Terminal.pausar(scanner);
             return false;
         }
 

@@ -112,6 +112,7 @@ public class Jogo {
 
         //começar a aventura
         etapaFloresta=0;
+        Terminal.pausar(scanner);
         aventura();
     }
 
@@ -128,6 +129,7 @@ public class Jogo {
     //========================JOGO====================================
     public void aventura(){
         introducao();
+        Terminal.limpar();
 
         System.out.println("\n================ CAPITULO 1 ================");
         System.out.println("              VILA DE VALENFORD");
@@ -154,11 +156,6 @@ public class Jogo {
         System.out.println("Os moradores correm desesperados.");
         System.out.println("Voce se prepara para lutar.");
 
-        System.out.println("\nPressione ENTER para iniciar o combate...");
-        while(!scanner.nextLine().isEmpty()){
-            System.out.println("Pressione apenas ENTER!");
-        }
-
         Personagem inimigo=new Goblin();
 
         if(!realizarEncontro(inimigo,40,20)){
@@ -181,6 +178,7 @@ public class Jogo {
 
         receberItem(Item.ADAGA);
         receberItem(Item.POCAO_PEQUENA);
+        Terminal.pausar(scanner);
 
         menuVila();
     }
@@ -206,6 +204,7 @@ public class Jogo {
     }
 
     private void introducao(){
+        Terminal.limpar();
         System.out.println("\n========================================================");
         System.out.println("             RPG - A ASCENSAO DAS SOMBRAS");
         System.out.println("========================================================\n");
@@ -330,6 +329,7 @@ public class Jogo {
             }
             else{
                 System.out.println("Escolha invalida!");
+                Terminal.pausar(scanner);
             }
         }
     }
@@ -372,6 +372,7 @@ public class Jogo {
         if(!venceu){
             System.out.println("\nSua jornada chegou ao fim...");
             System.out.println("Fim de jogo!");
+            Terminal.pausar(scanner);
             return false;
         }
 
@@ -383,8 +384,10 @@ public class Jogo {
     private void explorarFloresta(){
         if(etapaFloresta>=2){
             System.out.println("\nVoce ja investigou esta regiao!");
+            Terminal.pausar(scanner);
             return;
         }
+        Terminal.limpar();
 
         System.out.println("\n============== CAPITULO 2 ==============");
         System.out.println("             FLORESTA SOMBRIA");
@@ -392,7 +395,7 @@ public class Jogo {
 
         System.out.println("\nAo deixar Valenford, voce segue uma trilha");
         System.out.println("cercada por arvores antigas e uma nevoa intensa.");
-
+        Terminal.pausar(scanner);
         while(jogador.estaVivo()){
             Terminal.limpar();
 
@@ -431,7 +434,7 @@ public class Jogo {
                     if(!realizarEncontro(new Lobo(),50,25)){
                         return;
                     }
-
+                    
                     etapaFloresta=1;
 
                     receberItem(Item.ERVA_MEDICINAL);
@@ -439,6 +442,7 @@ public class Jogo {
                     System.out.println("\nCom o caminho livre, voce encontra");
                     System.out.println("uma carruagem abandonada.");
                     System.out.println("Estranhas teias cobrem toda sua superficie.");
+                    Terminal.pausar(scanner);
                 }
                 else if(etapaFloresta==1){
 
@@ -461,12 +465,13 @@ public class Jogo {
 
                     System.out.println("\nVoce decide retornar para Valenford");
                     System.out.println("e contar ao anciao o que descobriu.");
-
+                    Terminal.pausar(scanner);
                     return;
                 }
             }
             else{
                 System.out.println("Escolha invalida!");
+                Terminal.pausar(scanner);
             }
         }
     }
@@ -520,13 +525,16 @@ public class Jogo {
     private void explorarCovil(){
         if(etapaFloresta<2){
             System.out.println("Voce ainda precisa investigar a floresta!");
+            Terminal.pausar(scanner);
             return;
         }
 
         if(etapaFloresta==3){
             System.out.println("A Aranha Rainha ja foi derrotada!");
+            Terminal.pausar(scanner);
             return;
         }
+        Terminal.limpar();
 
         System.out.println("\n============== CAPITULO 3 ==============");
         System.out.println("             COVIL DAS ARANHAS");
@@ -535,6 +543,7 @@ public class Jogo {
         System.out.println("\nAnciao: Existe algo estranho naquela caverna.");
         System.out.println("Anciao: Essas criaturas nao pertencem a nossa floresta.");
         System.out.println("Anciao: Prepare-se antes de partir!");
+        Terminal.pausar(scanner);
 
         while(jogador.estaVivo()){
             Terminal.limpar();
@@ -590,11 +599,12 @@ public class Jogo {
                 System.out.println("\nAnciao: Ja vi essa marca antes...");
                 System.out.println("Anciao: Nas antigas ruinas das montanhas.");
                 System.out.println("Anciao: Talvez a origem de tudo esteja la.");
-
+                Terminal.pausar(scanner);
                 return;
             }
             else{
                 System.out.println("Escolha invalida!");
+                Terminal.pausar(scanner);
             }
         }
     }
