@@ -217,9 +217,9 @@ public class Jogo {
 
     //mais funcoes
     public void continuar_jogo(){
-        Terminal.limpar();
         try{
             EstadoJogo estado=Salvamento.carregar();
+            Terminal.limpar(); //só limpa se carregar o jogo
             this.jogador=estado.getJogador();
             this.etapaFloresta=estado.getEtapaFloresta();
             this.etapaNorte=estado.getEtapaNorte();
