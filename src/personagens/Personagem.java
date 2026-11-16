@@ -5,9 +5,14 @@ import java.util.List;
 import inventario.Inventario;
 import excecoes.RecursoInsuficienteException;
 import excecoes.InventarioException;
+import java.io.Serializable;
 
-public abstract class Personagem{ //abstract para podermos fazer abstract ataque 1 e 2 pra cada personagem ter o seu
+public abstract class Personagem implements Serializable{ //abstract para podermos fazer abstract ataque 1 e 2 pra cada personagem ter o seu
 
+    private static final long serialVersionUID=1L; //serializable
+    //serialVersionUID é um identificador de versão da classe para fins de serialização
+    //1 - primeira versão, L- long ao invés de int
+    
     private String nome;
     private int vida;
     private int vida_atual;

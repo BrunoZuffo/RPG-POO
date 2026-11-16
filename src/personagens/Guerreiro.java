@@ -2,6 +2,8 @@ package personagens;
 
 public class Guerreiro extends Personagem {
 
+    private static final long serialVersionUID=1L;
+
     private static final int REGEN_VIDA=4;
     private static final int REGEN_MANA=1;
     private static final int REGEN_STAMINA=12;

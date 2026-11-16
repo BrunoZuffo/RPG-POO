@@ -1,6 +1,8 @@
 package personagens;
 
 public class Anão extends Personagem{
+
+    private static final long serialVersionUID=1L;
     
     private static final int REGEN_VIDA=5;
     private static final int REGEN_MANA=1;

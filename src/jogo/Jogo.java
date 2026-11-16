@@ -22,6 +22,9 @@ import java.util.List;
 import excecoes.InventarioException;
 import excecoes.RecursoInsuficienteException;
 
+import java.io.IOException;
+import java.nio.file.NoSuchFileException;
+
 public class Jogo {
 
     private Scanner scanner;
@@ -41,19 +44,18 @@ public class Jogo {
     }
 
     public void menu(){
-        Terminal.limpar();
-        System.out.println("========================= RPG =========================\n\n");
-        System.out.println("1 - Continuar jogo\n");
-        System.out.println("2 - Comecar novo jogo\n");
-        System.out.println("3 - Sair\n");
-        System.out.println("=======================================================");
+        while(true){
+            Terminal.limpar();
 
-        int escolha=Entrada.lerInteiro(scanner);
-        while(escolha!=1&&escolha!=2&&escolha!=3){
-            System.out.println("Digite um valor válido!");       
-            escolha=Entrada.lerInteiro(scanner);     
-        }
-        if(escolha==1){
+            System.out.println("========================= RPG =========================");
+            System.out.println("\n1 - Continuar jogo");
+            System.out.println("2 - Comecar novo jogo");
+            System.out.println("3 - Sair");
+            System.out.println("\n=======================================================");
+            System.out.print("\nEscolha: ");
+
+            int escolha=Entrada.lerInteiro(scanner);
+            if(escolha==1){
                 continuar_jogo();
             }
             else if(escolha==2){
@@ -61,7 +63,13 @@ public class Jogo {
             }
             else if(escolha==3){
                 sair();
+                return;
             }
+            else{
+                System.out.println("Digite um valor valido!");
+                Terminal.pausar(scanner);
+            }
+        }
     }
 
     public void iniciar(){
@@ -198,7 +206,29 @@ public class Jogo {
 
     //mais funcoes
     public void continuar_jogo(){
-        
+        Terminal.limpar();
+        try{
+            EstadoJogo estado=Salvamento.carregar();
+            this.jogador=estado.getJogador();
+            this.etapaFloresta=estado.getEtapaFloresta();
+            this.etapaNorte=estado.getEtapaNorte();
+            System.out.println("Jogo carregado com sucesso!");
+            System.out.println("\nBem-vindo de volta, "+jogador.getNome()+"!");
+            System.out.println(jogador.getAtributosAtuais());
+            System.out.println(jogador.getProgresso());
+
+            Terminal.pausar(scanner);
+            menuVila();
+        }
+        catch(NoSuchFileException erro){
+            System.out.println("Nenhum jogo salvo encontrado!");
+            Terminal.pausar(scanner);
+        }
+        catch(IOException | ClassNotFoundException erro){
+            System.out.println("Erro ao carregar o jogo!");
+            System.out.println(erro.getMessage());
+            Terminal.pausar(scanner);
+        }
     }
 
     public void sair(){
@@ -329,8 +359,9 @@ public class Jogo {
             else{
                 System.out.println("7 - Explorar "+getProximaRegiao());
             }
+            System.out.println("8 - Salvar jogo");
 
-            System.out.println("0 - Sair do jogo");
+            System.out.println("0 - Voltar ao menu principal (sem salvar)");
 
             System.out.print("\nEscolha: ");
             int escolha=Entrada.lerInteiro(scanner);
@@ -356,6 +387,9 @@ public class Jogo {
             }
             else if(escolha==7){
                 explorarNorte();
+            }
+            else if(escolha==8){
+                salvarJogo();
             }
             else if(escolha==0){
                 return;
@@ -916,6 +950,20 @@ public class Jogo {
 
         System.out.println("\nObrigado por jogar!");
         System.out.println("FIM");
+
+        Terminal.pausar(scanner);
+    }
+
+    private void salvarJogo(){
+        try{
+            EstadoJogo estado=new EstadoJogo(jogador, etapaFloresta, etapaNorte);
+            Salvamento.salvar(estado);
+            System.out.println("\nJogo salvo com sucesso!");
+        }
+        catch(IOException erro){
+            System.out.println("Erro ao salvar o jogo!");
+            System.out.println(erro.getMessage());
+        }
 
         Terminal.pausar(scanner);
     }
