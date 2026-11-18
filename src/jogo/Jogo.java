@@ -37,7 +37,7 @@ public class Jogo {
     private Combate combate;
     private Loja loja;
 
-    //para se ele voltar para a vila sabermos onde voltar na floresta
+    //para se ele voltar para a vila sabermos onde voltar na floresta e na etapa norte
     private int etapaFloresta=0;
     private int etapaNorte=0;
 
@@ -67,7 +67,9 @@ public class Jogo {
                 iniciar();
             }
             else if(escolha==3){
-                sair();
+                if(sair()){
+                    return;
+                }
                 return;
             }
             else{
@@ -228,6 +230,13 @@ public class Jogo {
             System.out.println(jogador.getAtributosAtuais());
             System.out.println(jogador.getProgresso());
 
+            if(etapaNorte>=5){
+                System.out.println("\nVoce ja concluiu a campanha!");
+                Terminal.pausar(scanner);
+                jogador=null;
+                return;
+            }
+
             Terminal.pausar(scanner);
             menuVila();
         }
@@ -242,8 +251,15 @@ public class Jogo {
         }
     }
 
-    public void sair(){
-        return;
+    public boolean sair(){
+        if(jogador!=null && jogador.estaVivo()){
+            if(!salvarJogo()){
+                System.out.println("Saida cancelada: nao foi possivel salvar!");
+                Terminal.pausar(scanner);
+                return false;
+            }
+        }
+        return true;
     }
 
     private void introducao(){
@@ -377,7 +393,7 @@ public class Jogo {
             //gerenciamento da partida
             System.out.println("\n------------------ PARTIDA ------------------");
             System.out.println("8 - Salvar jogo");
-            System.out.println("0 - Voltar ao menu principal (sem salvar)");
+            System.out.println("0 - Voltar ao menu principal (Salvando)");
             System.out.println("\n=============================================");
             System.out.print("\nEscolha: ");
             int escolha=Entrada.lerInteiro(scanner);
@@ -406,9 +422,17 @@ public class Jogo {
             }
             else if(escolha==8){
                 salvarJogo();
+                Terminal.pausar(scanner);
             }
             else if(escolha==0){
-                return;
+                if(salvarJogo()){
+                    Terminal.pausar(scanner);
+                    jogador=null;
+                    return;
+                }
+
+                System.out.println("Nao foi possivel voltar sem salvar!");
+                Terminal.pausar(scanner);
             }
             else{
                 System.out.println("Escolha invalida!");
@@ -973,18 +997,24 @@ public class Jogo {
         Terminal.pausar(scanner);
     }
 
-    private void salvarJogo(){
+    private boolean salvarJogo(){
+        if(jogador==null){
+            return true;
+        }
+
         try{
-            EstadoJogo estado=new EstadoJogo(jogador, etapaFloresta, etapaNorte);
+            EstadoJogo estado=new EstadoJogo(jogador,etapaFloresta,etapaNorte);
+
             Salvamento.salvar(estado);
+
             System.out.println("\nJogo salvo com sucesso!");
+            return true;
         }
         catch(IOException erro){
             System.out.println("Erro ao salvar o jogo!");
             System.out.println(erro.getMessage());
+            return false;
         }
-
-        Terminal.pausar(scanner);
     }
 
 }
