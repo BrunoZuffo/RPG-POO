@@ -30,6 +30,8 @@ import excecoes.RecursoInsuficienteException;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 
+import personagens.FabricaPersonagem;
+
 public class Jogo {
 
     private Scanner scanner;
@@ -80,17 +82,12 @@ public class Jogo {
 
     public void iniciar(){
         Terminal.limpar();
-        Personagem[] personagens={
-            new Guerreiro(),
-            new Mago(),
-            new Anão(),
-            new Elfo(),
-            new Ladino(),
-            new Paladino(),
-            new Barbaro(),
-            new Druida(),
-            new Monge()
-        };
+        FabricaPersonagem[] fabricas=FabricaPersonagem.opcoes();
+        Personagem[] personagens=new Personagem[fabricas.length];
+
+        for(int i=0;i<fabricas.length;i++){
+            personagens[i]=fabricas[i].criar();
+        }
 
         System.out.println("========== ESCOLHA SEU PERSONAGEM ==========\n");
 
