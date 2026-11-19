@@ -350,7 +350,18 @@ public class Jogo {
     }
 
     private void menuVila(){
-        while(jogador.estaVivo() && etapaNorte<5){
+        AutoSave autoSave = new AutoSave(() -> {
+            synchronized(this){ // para que o autosave aguarde uma ação terminar antes de salvar os dados no meio e dar erro
+                if(jogador!=null && jogador.estaVivo() && etapaNorte<5){
+                    salvarJogo(true);
+                }
+            }
+        }, 60000);
+
+        autoSave.start();
+
+        try{
+            while(jogador.estaVivo() && etapaNorte<5){
             Terminal.limpar();
 
             System.out.println("\n============ VILA DE VALENFORD ============");
@@ -397,46 +408,52 @@ public class Jogo {
             System.out.print("\nEscolha: ");
             int escolha=Entrada.lerInteiro(scanner);
 
-            if(escolha==1){
-                menuInventario();
-            }
-            else if(escolha==2){
-                consultarAtributos();
-            }
-            else if(escolha==3){
-                descansarNaVila();
-                Terminal.pausar(scanner);
-            }
-            else if(escolha==4){
-                loja.abrir(jogador);
-            }
-            else if(escolha==5){
-                explorarFloresta();
-            }
-            else if(escolha==6){
-                explorarCovil();
-            }
-            else if(escolha==7){
-                explorarNorte();
-            }
-            else if(escolha==8){
-                salvarJogo();
-                Terminal.pausar(scanner);
-            }
-            else if(escolha==0){
-                if(salvarJogo()){
-                    Terminal.pausar(scanner);
-                    jogador=null;
-                    return;
+            synchronized(this){
+                if(escolha==1){
+                    menuInventario();
                 }
+                else if(escolha==2){
+                    consultarAtributos();
+                }
+                else if(escolha==3){
+                    descansarNaVila();
+                    Terminal.pausar(scanner);
+                }
+                else if(escolha==4){
+                    loja.abrir(jogador);
+                }
+                else if(escolha==5){
+                    explorarFloresta();
+                }
+                else if(escolha==6){
+                    explorarCovil();
+                }
+                else if(escolha==7){
+                    explorarNorte();
+                }
+                else if(escolha==8){
+                    salvarJogo();
+                    Terminal.pausar(scanner);
+                }
+                else if(escolha==0){
+                    if(salvarJogo()){
+                        Terminal.pausar(scanner);
+                        jogador=null;
+                        return;
+                    }
 
-                System.out.println("Nao foi possivel voltar sem salvar!");
-                Terminal.pausar(scanner);
+                    System.out.println("Nao foi possivel voltar sem salvar!");
+                    Terminal.pausar(scanner);
+                }
+                else{
+                    System.out.println("Escolha invalida!");
+                    Terminal.pausar(scanner);
+                }
             }
-            else{
-                System.out.println("Escolha invalida!");
-                Terminal.pausar(scanner);
-            }
+        }
+        }
+        finally{
+            autoSave.encerrar();
         }
     }
 
