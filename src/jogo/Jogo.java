@@ -70,7 +70,6 @@ public class Jogo {
                 if(sair()){
                     return;
                 }
-                return;
             }
             else{
                 System.out.println("Digite um valor valido!");
