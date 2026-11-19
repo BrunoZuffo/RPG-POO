@@ -12,7 +12,7 @@ public class Inventario implements Serializable{
     private static final long serialVersionUID=1L;
 
     private final int capacidadeBase;
-    private List<Item> itens;
+    private List<Item> itens; //genérico
 
     public Inventario(int capacidadeBase){
 
@@ -21,7 +21,7 @@ public class Inventario implements Serializable{
         }
 
         this.capacidadeBase=capacidadeBase;
-        this.itens=new ArrayList<>();
+        this.itens=new ArrayList<>(); //collections
     }
 
     public int getCapacidade(){
