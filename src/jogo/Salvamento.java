@@ -1,3 +1,5 @@
+//pra persistencia de dados criamos dois arquivos, salvamento java e EstadoJogo
+
 package jogo;
 
 import java.io.IOException;
@@ -23,7 +25,7 @@ public class Salvamento{
             try(ObjectOutputStream saida=new ObjectOutputStream( //escrever arquivos serializados
                 Files.newOutputStream(temporario))){
 
-                saida.writeObject(estado); //salvando objeto
+                saida.writeObject(estado); //salvando objeto -> responsavel por gravar os dados
             }
 
             //substituindo o save anterior somente apos a escrita

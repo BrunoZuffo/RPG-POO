@@ -1,18 +1,18 @@
 package jogo;
 
-public class AutoSave extends Thread{ //extends Thread cria nossa prova thread ( subtarefa de um processo maior )
+public class AutoSave extends Thread{ //extends Thread cria nossa propria thread ( subtarefa de um processo maior )
                                       //é a menor sequência de instruções que um processador pode gerenciar e executar de forma independente dentro de um programa.
-    private final Runnable tarefa; //operação que a thread vai fazer do tipo runnable, ou seja, run vem desse runnable
+    private final Runnable tarefa; //tarefa a ser executada, nao sabemos ainda, vamos saber so no construtor
     private final long intervaloMs; //aguarda um intervalo sem consumir cpu em um loop
-    private final Object controle = new Object(); 
-    private boolean ativo = true;
+    private final Object controle = new Object(); //objeto pra coordenar a thread
+    private boolean ativo = true; //indicar se a thread deve continuar fnconando
 
     public AutoSave(Runnable tarefa, long intervaloMs) { //construtor
         this.tarefa = tarefa;
         this.intervaloMs = intervaloMs;
 
         setDaemon(true); //evita que a thread sozinha impeça o encerramento da jvm
-        setName("Autosave-RPG");
+        setName("Autosave-RPG"); //definindo um nome pra thread só pra caso de debugar dps se precisar
     }
 
     @Override
@@ -36,7 +36,7 @@ public class AutoSave extends Thread{ //extends Thread cria nossa prova thread (
                 }
             }
 
-            tarefa.run(); //run vindo do runnable interface
+            tarefa.run(); //run vindo do runnable interface, ou seja run da tarefa
         }
     }
 
