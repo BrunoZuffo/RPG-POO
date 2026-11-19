@@ -2,7 +2,7 @@ package jogo;
 
 public class AutoSave extends Thread{ //extends Thread cria nossa prova thread ( subtarefa de um processo maior )
                                       //é a menor sequência de instruções que um processador pode gerenciar e executar de forma independente dentro de um programa.
-    private final Runnable tarefa; //operação que a thread vai fazer
+    private final Runnable tarefa; //operação que a thread vai fazer do tipo runnable, ou seja, run vem desse runnable
     private final long intervaloMs; //aguarda um intervalo sem consumir cpu em um loop
     private final Object controle = new Object(); 
     private boolean ativo = true;
@@ -36,7 +36,7 @@ public class AutoSave extends Thread{ //extends Thread cria nossa prova thread (
                 }
             }
 
-            tarefa.run();
+            tarefa.run(); //run vindo do runnable interface
         }
     }
 

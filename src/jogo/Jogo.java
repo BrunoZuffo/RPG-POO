@@ -1013,22 +1013,35 @@ public class Jogo {
         Terminal.pausar(scanner);
     }
 
-    private boolean salvarJogo(){
+    private synchronized boolean salvarJogo(){
+        return salvarJogo(false);
+    }
+
+    private synchronized boolean salvarJogo(boolean automatico){
         if(jogador==null){
             return true;
         }
-
         try{
-            EstadoJogo estado=new EstadoJogo(jogador,etapaFloresta,etapaNorte);
-
+            EstadoJogo estado=new EstadoJogo(
+                jogador,etapaFloresta,etapaNorte
+            );
             Salvamento.salvar(estado);
 
-            System.out.println("\nJogo salvo com sucesso!");
+            if(!automatico){
+                System.out.println("\nJogo salvo com sucesso!");
+            }
             return true;
         }
         catch(IOException erro){
-            System.out.println("Erro ao salvar o jogo!");
-            System.out.println(erro.getMessage());
+            if(automatico){
+                System.err.println(
+                    "Erro no autosave: "+erro.getMessage()
+                );
+            }
+            else{
+                System.out.println("Erro ao salvar o jogo!");
+                System.out.println(erro.getMessage());
+            }
             return false;
         }
     }
